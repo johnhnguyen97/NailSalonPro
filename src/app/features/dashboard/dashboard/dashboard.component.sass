@@ -1,0 +1,149 @@
+.dashboard-container
+  padding: 24px
+  max-width: 1200px
+  margin: 0 auto
+  width: 100%
+  transition: all 0.3s ease
+
+  &.sidebar-collapsed
+    max-width: 1328px // 1200px + 128px (difference from expanded to collapsed sidebar)
+
+  .stats-grid
+    display: grid
+    grid-template-columns: repeat(3, 1fr)
+    gap: 24px
+    margin-bottom: 24px
+
+    .stat-card
+      background: white
+      border-radius: 12px
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05)
+      
+      .stat-content
+        display: flex
+        align-items: center
+        padding: 20px
+        gap: 16px
+
+        .stat-icon
+          font-size: 32px
+          width: 32px
+          height: 32px
+          color: #ff4081
+          opacity: 0.9
+
+        .stat-info
+          h3
+            margin: 0
+            font-size: 14px
+            color: #666
+            font-weight: 500
+
+          .stat-value
+            margin: 8px 0 0
+            font-size: 24px
+            font-weight: 600
+            color: #2c3e50
+
+  .activity-card
+    background: white
+    border-radius: 12px
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05)
+
+    mat-card-header
+      padding: 20px 20px 0
+
+      mat-card-title
+        font-size: 18px
+        font-weight: 500
+        color: #2c3e50
+
+    .activity-list
+      padding: 0 20px 20px
+
+      .activity-item
+        display: flex
+        align-items: flex-start
+        padding: 16px 0
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08)
+        
+        &:last-child
+          border-bottom: none
+
+        .activity-icon
+          color: #666
+          margin-right: 16px
+          font-size: 20px
+          opacity: 0.8
+
+        .activity-details
+          flex: 1
+
+          .activity-text
+            margin: 0
+            font-size: 14px
+            color: #2c3e50
+
+          .activity-time
+            font-size: 12px
+            color: #666
+            opacity: 0.8
+
+// Responsive adjustments
+// Responsive adjustments
+@media screen and (max-width: 1200px)
+  .dashboard-container
+    max-width: calc(100% - 48px)
+    transition: max-width 0.3s ease, padding 0.3s ease
+    
+    &.sidebar-collapsed
+      max-width: calc(100% - 48px)
+    
+    .stats-grid
+      gap: 20px
+      transition: gap 0.3s ease
+
+@media screen and (max-width: 992px)
+  .dashboard-container
+    .stats-grid
+      gap: 16px
+      grid-template-columns: repeat(2, 1fr)
+      transition: all 0.3s ease
+
+    .activity-card
+      transition: all 0.3s ease
+
+@media screen and (max-width: 768px)
+  .dashboard-container
+    padding: 16px
+    max-width: 100%
+    transition: all 0.3s ease
+    
+    .stats-grid
+      grid-template-columns: 1fr
+      gap: 16px
+
+    .activity-card
+      mat-card-header
+        padding: 16px 16px 0
+        transition: padding 0.3s ease
+
+      .activity-list
+        padding: 0 16px 16px
+        transition: padding 0.3s ease
+
+@media screen and (max-width: 576px)
+  .dashboard-container
+    padding: 12px
+    
+    .stats-grid
+      gap: 12px
+
+    .activity-card
+      .activity-item
+        flex-direction: column
+        gap: 8px
+        
+        .activity-icon
+          margin-right: 0
+          margin-bottom: 4px
