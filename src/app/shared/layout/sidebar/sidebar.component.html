@@ -1,0 +1,14 @@
+<!-- This template uses the menuItems array from the TypeScript file -->
+<div class="sidebar-container">
+  <mat-nav-list>
+    <!-- *ngFor loops through the menuItems array -->
+    <a mat-list-item 
+       *ngFor="let item of menuItems"
+       [routerLink]="item.path"
+       routerLinkActive="active"
+       (click)="onMenuItemClick(item)">
+      <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
+      <span matListItemTitle>{{item.label}}</span>
+    </a>
+  </mat-nav-list>
+</div>

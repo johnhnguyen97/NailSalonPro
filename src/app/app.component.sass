@@ -1,0 +1,78 @@
+:host
+  display: block
+  height: 100vh
+
+.header
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  height: 52px  // Even more compact
+  background-color: #fff
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08)  // Softer shadow
+  z-index: 1000
+  padding: 0 20px
+  display: flex
+  align-items: center
+
+  .header-left
+    display: flex
+    align-items: center
+    gap: 32px  // More space between hamburger and logo
+
+    .hamburger-button
+      width: 22px  // Smaller hamburger
+      height: 18px
+      position: relative
+      border: none
+      background: none
+      cursor: pointer
+      padding: 0
+
+      .line
+        width: 100%
+        height: 2px
+        background-color: #424242  // Darker lines
+        position: absolute
+        left: 0
+        transition: transform 0.3s ease
+
+        &.line-1
+          top: 0
+
+        &.line-2
+          top: 50%
+          transform: translateY(-50%)
+
+        &.line-3
+          bottom: 0
+
+    .logo
+      display: flex
+      align-items: center
+      gap: 10px
+      
+      mat-icon
+        color: #ff4081  // Pink color for nail salon theme
+        font-size: 24px
+        height: 24px
+        width: 24px
+      
+      span
+        font-size: 16px
+        font-weight: 500
+        color: #2c3e50
+        letter-spacing: 0.3px
+
+mat-sidenav-container
+  height: calc(100vh - 52px)  // Adjusted for new header height
+  margin-top: 52px
+
+  mat-sidenav
+    width: 240px  // Slightly narrower
+    background-color: #fff
+    border-right: 1px solid rgba(0, 0, 0, 0.06)  // Even lighter border
+
+  mat-sidenav-content
+    background-color: #f8f9fa
+    padding: 20px 24px  // Adjusted padding

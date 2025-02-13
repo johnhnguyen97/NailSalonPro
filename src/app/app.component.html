@@ -1,0 +1,25 @@
+<div class="header">
+  <div class="header-left">
+    <button class="hamburger-button" 
+            [class.animated]="isMenuAnimated"
+            (click)="toggleSidebar()">
+      <span class="line line-1"></span>
+      <span class="line line-2"></span>
+      <span class="line line-3"></span>
+    </button>
+    <div class="logo">
+      <mat-icon>spa</mat-icon>
+      <span>NailBook Pro</span>
+    </div>
+  </div>
+</div>
+
+<mat-sidenav-container>
+  <mat-sidenav [opened]="isSidebarOpen" mode="side">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
