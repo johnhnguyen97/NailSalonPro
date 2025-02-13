@@ -1,22 +1,27 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { SharedModule } from './shared/shared.module';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { SidebarComponent } from './shared/layout/sidebar/sidebar.component';
+import { SidebarService } from './shared/services/sidebar.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass'],
   standalone: true,
-  imports: [RouterOutlet, MatSidenavModule, SharedModule]
+  imports: [
+    CommonModule,
+    RouterModule,
+    SidebarComponent
+  ],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'appointment-dashboard';
-  isSidebarOpen = true;
-  isMenuAnimated = false;  // Changed from isMenuAnimation to isMenuAnimated to match HTML
+  title = 'NailBook Pro';
+  isCollapsed$;
+  isMobileCollapsed$;
 
-  toggleSidebar() {
-    this.isSidebarOpen = !this.isSidebarOpen;
-    this.isMenuAnimated = !this.isMenuAnimated;
+  constructor(private sidebarService: SidebarService) {
+    this.isCollapsed$ = this.sidebarService.isCollapsed$;
+    this.isMobileCollapsed$ = this.sidebarService.isMobileCollapsed$;
   }
 }

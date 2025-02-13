@@ -1,21 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { SidebarService } from '../../services/sidebar.service';
 
 @Component({
-  selector: 'app-sidebar',  // This is used in HTML like <app-sidebar>
-  templateUrl: './sidebar.component.html',  // Points to the HTML template
-  styleUrls: ['./sidebar.component.sass'],  // Points to the SASS styles
-  standalone: false
+  selector: 'app-sidebar',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatListModule,
+    MatIconModule,
+    MatButtonModule
+  ],
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.sass']
 })
 export class SidebarComponent {
-  // This array is used in the HTML with *ngFor
-  menuItems = [
-    { path: '/appointments', icon: 'event', label: 'Appointments' },
-    { path: '/clients', icon: 'people', label: 'Clients' },
-    { path: '/settings', icon: 'settings', label: 'Settings' }
-  ];
+  userEmail = 'admin&#64;nailsalonpro.com';
+  isCollapsed$;
+  isMobileCollapsed$;
+  isMobile = false;
 
-  // You can also add methods that can be called from the HTML
-  onMenuItemClick(item: any) {
-    console.log(`Clicked: ${item.label}`);
+  constructor(private sidebarService: SidebarService) {
+    this.isCollapsed$ = this.sidebarService.isCollapsed$;
+    this.isMobileCollapsed$ = this.sidebarService.isMobileCollapsed$;
+    this.checkScreenSize();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.checkScreenSize();
+  }
+
+  private checkScreenSize() {
+    this.isMobile = window.innerWidth <= 576;
+  }
+
+  toggleSidebar() {
+    this.sidebarService.toggleSidebar(this.isMobile);
   }
 }
