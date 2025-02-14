@@ -24,6 +24,11 @@ type CalendarView = 'day' | 'week' | 'month' | 'year';
 export class CalendarComponent {
   currentDate: Date = new Date();
   calendarView: CalendarView = 'month';
+  views: CalendarView[] = ['day', 'week', 'month', 'year'];
+
+  setView(view: CalendarView): void {
+    this.calendarView = view;
+  }
 
   goToToday(): void {
     this.currentDate = new Date();

@@ -3,31 +3,32 @@
   <mat-card-content>
     <div class="calendar-header">
       <div class="calendar-controls">
-        <!-- Left Side Controls -->
-        <div class="nav-controls">
+        <!-- Left Side: Today Button -->
+        <button mat-icon-button (click)="goToToday()" class="today-btn">
+          <mat-icon>today</mat-icon>
+        </button>
+
+        <!-- Center: Month Navigation -->
+        <div class="month-nav">
           <button mat-icon-button (click)="navigate('prev')">
             <mat-icon>chevron_left</mat-icon>
           </button>
-          <span class="current-date">{{ currentDate | date:'MMM yyyy' }}</span>
+          <span class="current-date">{{ currentDate | date:'MMM d, yyyy' }}</span>
           <button mat-icon-button (click)="navigate('next')">
             <mat-icon>chevron_right</mat-icon>
           </button>
         </div>
-        
-        <!-- Right Side Controls -->
-        <div class="action-controls">
-          <button mat-icon-button (click)="goToToday()" class="today-btn">
-            <mat-icon>today</mat-icon>
-          </button>
-          <button mat-icon-button class="view-toggle-btn">
-            <mat-icon>calendar_view_month</mat-icon>
-          </button>
-          <mat-button-toggle-group [value]="calendarView" class="view-toggle mobile-hidden">
-            <mat-button-toggle value="day">Day</mat-button-toggle>
-            <mat-button-toggle value="week">Week</mat-button-toggle>
-            <mat-button-toggle value="month">Month</mat-button-toggle>
-            <mat-button-toggle value="year">Year</mat-button-toggle>
-          </mat-button-toggle-group>
+
+        <!-- Right Side: View Toggle -->
+        <div class="view-controls">
+          <div class="view-toggle">
+            <button mat-button 
+                    *ngFor="let view of views" 
+                    [class.active]="calendarView === view"
+                    (click)="setView(view)">
+              {{view | titlecase}}
+            </button>
+          </div>
         </div>
       </div>
     </div>
