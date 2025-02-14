@@ -1,0 +1,49 @@
+<mat-card class="calendar-container">
+  <!-- Calendar Header with Controls -->
+  <mat-card-content>
+    <div class="calendar-header">
+      <div class="calendar-controls">
+        <!-- Left Side Controls -->
+        <div class="nav-controls">
+          <button mat-icon-button (click)="navigate('prev')">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <span class="current-date">{{ currentDate | date:'MMM yyyy' }}</span>
+          <button mat-icon-button (click)="navigate('next')">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+        
+        <!-- Right Side Controls -->
+        <div class="action-controls">
+          <button mat-icon-button (click)="goToToday()" class="today-btn">
+            <mat-icon>today</mat-icon>
+          </button>
+          <button mat-icon-button class="view-toggle-btn">
+            <mat-icon>calendar_view_month</mat-icon>
+          </button>
+          <mat-button-toggle-group [value]="calendarView" class="view-toggle mobile-hidden">
+            <mat-button-toggle value="day">Day</mat-button-toggle>
+            <mat-button-toggle value="week">Week</mat-button-toggle>
+            <mat-button-toggle value="month">Month</mat-button-toggle>
+            <mat-button-toggle value="year">Year</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calendar Grid -->
+    <div class="calendar-grid">
+      <!-- Days Header -->
+      <div class="days-header">
+        <div class="day-label">Mon</div>
+        <div class="day-label">Tue</div>
+        <div class="day-label">Wed</div>
+        <div class="day-label">Thu</div>
+        <div class="day-label">Fri</div>
+        <div class="day-label">Sat</div>
+        <div class="day-label">Sun</div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
