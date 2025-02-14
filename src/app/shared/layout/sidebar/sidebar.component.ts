@@ -37,7 +37,13 @@ export class SidebarComponent {
   }
 
   private checkScreenSize() {
+    const wasMobile = this.isMobile;
     this.isMobile = window.innerWidth <= 576;
+    
+    // Reset mobile collapsed state when transitioning from mobile to desktop
+    if (wasMobile && !this.isMobile) {
+      this.sidebarService.resetMobileCollapsed();
+    }
   }
 
   toggleSidebar() {

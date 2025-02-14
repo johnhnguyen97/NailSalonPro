@@ -19,6 +19,10 @@ export class SidebarService {
     }
   }
 
+  resetMobileCollapsed() {
+    this.isMobileCollapsedSubject.next(false);
+  }
+
   getIsCollapsed(isMobile = false) {
     return isMobile ? this.isMobileCollapsedSubject.value : this.isCollapsedSubject.value;
   }

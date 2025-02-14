@@ -2,9 +2,8 @@
   display: flex
   flex-direction: column
   height: 100%
-  background: white
+  background: #f5f5f5
   width: 200px
-  border-right: 1px solid rgba(0, 0, 0, 0.08)
   transition: all 0.3s ease
   overflow: hidden
 
@@ -16,7 +15,7 @@
         display: none
 
     .profile-container
-      padding: 12px
+      padding: 20px
       
       .user-profile
         justify-content: center
@@ -25,7 +24,7 @@
           display: none
 
     .nav-container
-      padding: 12px 0
+      padding: 20px 0
 
       .nav-grid-wrapper
         width: 56px
@@ -34,17 +33,21 @@
 
         .nav-grid
           grid-template-columns: 1fr
-          gap: 12px
+          gap: 0
 
           .nav-tile
             padding: 8px 4px
             background: none
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05)
+
+            &:last-child
+              border-bottom: none
 
             span
               display: none
 
     .footer-container
-      padding: 12px 8px
+      padding: 20px
 
       .bottom-actions
         .action-item
@@ -57,35 +60,38 @@
   .logo-container
     display: flex
     align-items: center
-    padding: 16px
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08)
+    padding: 20px
     transition: padding 0.3s ease
 
     .toggle-btn
       margin-right: 12px
       transition: margin 0.3s ease
+      color: rgba(0, 0, 0, 0.4)
+
+      &:hover
+        background-color: rgba(0, 0, 0, 0.03)
 
     .logo
-      font-size: 18px
+      font-size: 14px
       font-weight: 500
-      color: #2c3e50
+      color: rgba(0, 0, 0, 0.6)
       transition: opacity 0.3s ease
 
   .profile-container
-    padding: 16px
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08)
+    padding: 20px
     transition: padding 0.3s ease
 
     .user-profile
       display: flex
+      flex-direction: column
       align-items: center
       gap: 12px
       transition: all 0.3s ease
 
       .profile-image
         position: relative
-        width: 40px
-        height: 40px
+        width: 64px
+        height: 64px
         flex-shrink: 0
         transition: all 0.3s ease
 
@@ -94,8 +100,6 @@
           height: 100%
           border-radius: 50%
           object-fit: cover
-          border: 2px solid #fff
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
           transition: all 0.3s ease
 
         .status-badge
@@ -106,43 +110,41 @@
           height: 10px
           background: #4CAF50
           border-radius: 50%
-          border: 2px solid #fff
           color: transparent
           transition: all 0.3s ease
 
       .profile-info
+        text-align: center
         transition: opacity 0.3s ease
         h3
           margin: 0
-          font-size: 14px
+          font-size: 13px
           font-weight: 500
-          color: #2c3e50
+          color: rgba(0, 0, 0, 0.6)
 
         p
-          margin: 2px 0 0
-          font-size: 12px
-          color: #666
-          opacity: 0.8
+          margin: 4px 0 0
+          font-size: 11px
+          color: rgba(0, 0, 0, 0.4)
 
   .nav-container
     flex: 1
     display: flex
     align-items: center
     justify-content: center
-    padding: 16px 0
+    padding: 24px 0
     transition: padding 0.3s ease
 
     .nav-grid-wrapper
-      width: 140px
-      background: rgba(0, 0, 0, 0.02)
-      border-radius: 12px
-      padding: 8px
+      width: 160px
+      border-radius: 0
       transition: all 0.3s ease
+      border: 1px solid rgba(0, 0, 0, 0.05)
 
       .nav-grid
         display: grid
         grid-template-columns: repeat(2, 1fr)
-        gap: 8px
+        gap: 0
         transition: all 0.3s ease
 
         .nav-tile
@@ -151,14 +153,22 @@
           align-items: center
           justify-content: center
           text-decoration: none
-          padding: 10px 4px
-          border-radius: 8px
+          padding: 16px 4px
+          border-radius: 0
           transition: all 0.2s ease
           aspect-ratio: 1
-          background: white
+          background: #f5f5f5
+          border-right: 1px solid rgba(0, 0, 0, 0.05)
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05)
+          
+          &:nth-child(2n)
+            border-right: none
+
+          &:nth-last-child(-n+2)
+            border-bottom: none
       
           &.active
-            background-color: rgba(255, 64, 129, 0.08)
+            background-color: rgba(0, 0, 0, 0.03)
             
             mat-icon
               color: #ff4081
@@ -168,10 +178,10 @@
               font-weight: 500
           
           &:hover
-            background-color: rgba(0, 0, 0, 0.04)
+            background-color: rgba(0, 0, 0, 0.03)
           
           mat-icon
-            color: #666
+            color: rgba(0, 0, 0, 0.4)
             font-size: 20px
             width: 20px
             height: 20px
@@ -180,7 +190,7 @@
           
           span
             font-size: 11px
-            color: #424242
+            color: rgba(0, 0, 0, 0.5)
             text-align: center
             white-space: nowrap
             overflow: hidden
@@ -190,8 +200,7 @@
 
   .footer-container
     margin-top: auto
-    border-top: 1px solid rgba(0, 0, 0, 0.08)
-    padding: 16px
+    padding: 20px
     transition: padding 0.3s ease
     
     .bottom-actions
@@ -204,18 +213,18 @@
         display: flex
         align-items: center
         padding: 8px 12px
-        border-radius: 8px
+        border-radius: 0
         text-decoration: none
         transition: all 0.2s ease
         opacity: 0.7
         
         &:hover
           opacity: 1
-          background-color: rgba(0, 0, 0, 0.04)
+          background-color: rgba(0, 0, 0, 0.03)
         
         mat-icon
           margin-right: 12px
-          color: #666
+          color: rgba(0, 0, 0, 0.4)
           font-size: 20px
           width: 20px
           height: 20px
@@ -223,7 +232,7 @@
         
         span
           font-size: 13px
-          color: #424242
+          color: rgba(0, 0, 0, 0.5)
           transition: opacity 0.3s ease
 
 // Responsive adjustments
@@ -246,88 +255,8 @@
         width: 120px
         
         .nav-grid
-          gap: 6px
+          gap: 0
 
 @media screen and (max-width: 576px)
   .sidebar-container
-    position: fixed
-    bottom: 0
-    left: 0
-    right: 0
-    width: 100%
-    height: 64px
-    border-right: none
-    border-top: 1px solid rgba(0, 0, 0, 0.08)
-    background: white
-    padding: 0
-    z-index: 1000
-    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1)
-    overflow: visible
-    display: flex
-    align-items: center
-    justify-content: center
-    transition: transform 0.3s ease
-    
-    &.mobile
-      .logo-container, .profile-container, .footer-container
-        display: none
-
-      &.mobile-collapsed
-        transform: translateY(100%)
-
-      .nav-container
-        padding: 0
-        height: 100%
-        width: 100%
-        
-        .nav-grid-wrapper
-          width: 100%
-          height: 100%
-          max-width: none
-          background: none
-          padding: 0
-          border-radius: 0
-          
-          .nav-grid
-            display: flex
-            justify-content: space-around
-            align-items: center
-            height: 100%
-            margin: 0
-            padding: 0
-
-            .nav-tile
-              flex: 1
-              height: 100%
-              padding: 8px 0
-              border-radius: 0
-              background: none
-              display: flex
-              flex-direction: column
-              align-items: center
-              justify-content: center
-              gap: 4px
-
-              &.active
-                background-color: rgba(255, 64, 129, 0.08)
-                
-                mat-icon
-                  color: #ff4081
-                
-                span
-                  color: #ff4081
-
-              mat-icon
-                margin: 0
-                font-size: 24px
-                width: 24px
-                height: 24px
-
-              span
-                font-size: 12px
-                margin: 0
-                white-space: nowrap
-                overflow: hidden
-                text-overflow: ellipsis
-                width: 100%
-                text-align: center
+    display: none

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SidebarComponent } from './shared/layout/sidebar/sidebar.component';
+import { MobileNavComponent } from './shared/layout/mobile-nav/mobile-nav.component';
 import { SidebarService } from './shared/services/sidebar.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { SidebarService } from './shared/services/sidebar.service';
   imports: [
     CommonModule,
     RouterModule,
-    SidebarComponent
+    SidebarComponent,
+    MobileNavComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass']

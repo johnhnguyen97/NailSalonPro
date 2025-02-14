@@ -1,0 +1,18 @@
+<nav class="mobile-nav" [class.collapsed]="isCollapsed$ | async">
+  <a class="nav-item" routerLink="/dashboard" routerLinkActive="active">
+    <mat-icon>dashboard</mat-icon>
+    <span>Dashboard</span>
+  </a>
+  <a class="nav-item" routerLink="/calendar" routerLinkActive="active">
+    <mat-icon>calendar_today</mat-icon>
+    <span>Calendar</span>
+  </a>
+  <a class="nav-item" routerLink="/clients" routerLinkActive="active">
+    <mat-icon>people</mat-icon>
+    <span>Clients</span>
+  </a>
+  <a class="nav-item" routerLink="/settings" routerLinkActive="active">
+    <mat-icon>settings</mat-icon>
+    <span>Settings</span>
+  </a>
+</nav>
