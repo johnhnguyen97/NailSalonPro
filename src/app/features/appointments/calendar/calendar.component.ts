@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { PageContainerComponent } from '../../../shared/layout/page-container/page-container.component';
 
 type CalendarView = 'day' | 'week' | 'month' | 'year';
 
@@ -17,7 +18,8 @@ type CalendarView = 'day' | 'week' | 'month' | 'year';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    PageContainerComponent
   ],
   providers: [DatePipe]
 })

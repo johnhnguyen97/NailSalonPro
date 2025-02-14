@@ -1,14 +1,55 @@
 @use '@angular/material' as mat
 
+:root
+  // Light theme variables
+  --background-color: #fafafa
+  --text-color: rgba(0, 0, 0, 0.87)
+  --secondary-text: rgba(0, 0, 0, 0.6)
+  --border-color: rgba(0, 0, 0, 0.12)
+  --card-background: #ffffff
+  --hover-background: rgba(0, 0, 0, 0.04)
+
+.dark-theme
+  // Dark theme variables
+  --background-color: #303030
+  --text-color: #ffffff
+  --secondary-text: rgba(255, 255, 255, 0.7)
+  --border-color: rgba(255, 255, 255, 0.12)
+  --card-background: #424242
+  --hover-background: rgba(255, 255, 255, 0.08)
+  
+  // Override Material theme
+  @import '@angular/material/prebuilt-themes/purple-green.css'
+
 html, body
   margin: 0
   padding: 0
   height: 100%
   font-family: Roboto, "Helvetica Neue", sans-serif
-  background-color: #fafafa
+
+body
+  background-color: var(--background-color)
+  color: var(--text-color)
+  transition: background-color 0.3s ease, color 0.3s ease
 
 *, *::before, *::after
   box-sizing: border-box
 
-// Import pre-built theme
+// Light theme by default
 @import '@angular/material/prebuilt-themes/indigo-pink.css'
+
+// Custom styles for themed elements
+.mat-mdc-card
+  background-color: var(--card-background)
+  color: var(--text-color)
+
+.mat-mdc-list-item
+  color: var(--text-color)
+  &:hover
+    background-color: var(--hover-background)
+
+.mat-divider
+  border-color: var(--border-color)
+
+.secondary-text
+  color: var(--secondary-text)
