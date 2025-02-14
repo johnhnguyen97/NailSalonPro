@@ -5,28 +5,26 @@
   overflow: hidden
 
   .calendar-header
-<<<<<<< HEAD
-    padding: 12px 16px
-=======
-    padding: 16px
->>>>>>> 7742d971c9f8102245d8997e11a81898e308d585
+    padding: 10px 12px
     border-bottom: 1px solid rgba(0, 0, 0, 0.05)
 
     .calendar-controls
       display: flex
       align-items: center
       justify-content: space-between
-<<<<<<< HEAD
-      gap: 12px
+      gap: 8px
 
-      .today-btn
-        color: rgba(0, 0, 0, 0.6)
-        padding: 6px
+      button
+        border-radius: 4px
         transition: all 0.2s ease
 
         &:hover
           background-color: rgba(0, 0, 0, 0.03)
-          
+
+      .today-btn
+        color: rgba(0, 0, 0, 0.6)
+        padding: 4px
+        
         mat-icon
           font-size: 16px
           width: 16px
@@ -35,17 +33,13 @@
       .month-nav
         display: flex
         align-items: center
-        gap: 12px
+        gap: 8px
         flex: 1
         justify-content: center
 
         button
           color: rgba(0, 0, 0, 0.6)
-          padding: 6px
-          transition: all 0.2s ease
-
-          &:hover
-            background-color: rgba(0, 0, 0, 0.03)
+          padding: 4px
 
           mat-icon
             font-size: 16px
@@ -53,27 +47,25 @@
             height: 16px
 
         .current-date
-          font-size: 13px
+          font-size: 12px
           font-weight: 500
           color: rgba(0, 0, 0, 0.87)
-          min-width: 120px
+          min-width: 100px
           text-align: center
 
       .view-controls
         .view-toggle
           display: flex
-          gap: 2px
+          gap: 1px
 
           button
-            min-width: 40px
-            height: 24px
-            padding: 4px 6px
-            font-size: 11px
-            line-height: 16px
+            min-width: 36px
+            height: 22px
+            padding: 2px 4px
+            font-size: 10px
+            line-height: 18px
             color: rgba(0, 0, 0, 0.6)
-            border-radius: 3px
             text-transform: capitalize
-            transition: all 0.2s ease
 
             &:hover
               background-color: rgba(0, 0, 0, 0.03)
@@ -81,81 +73,27 @@
             &.active
               background: rgba(0, 0, 0, 0.05)
               color: #ff4081
+              font-weight: 500
 
         .view-toggle-btn
           display: none
           color: rgba(0, 0, 0, 0.6)
 
   .calendar-grid
-    padding: 12px
-=======
-      gap: 24px
-
-      @media (max-width: 576px)
-        gap: 12px
-        
-        .nav-controls
-          .current-date
-            font-size: 14px
-            min-width: 80px
-
-        .action-controls
-          gap: 8px
-
-      .nav-controls
-        display: flex
-        align-items: center
-        gap: 16px
-
-        .current-date
-          font-size: 16px
-          font-weight: 500
-          color: rgba(0, 0, 0, 0.87)
-          min-width: 100px
-          text-align: center
-
-      .action-controls
-        display: flex
-        align-items: center
-        gap: 16px
-
-        .view-toggle
-          ::ng-deep
-            .mat-button-toggle-group
-              border-radius: 8px
-              border: 1px solid rgba(0, 0, 0, 0.12)
-              
-            .mat-button-toggle
-              background: white
-              color: rgba(0, 0, 0, 0.6)
-              font-size: 13px
-              padding: 0 16px
-              
-              &.mat-button-toggle-checked
-                background: rgba(0, 0, 0, 0.05)
-                color: #ff4081
-
-  .calendar-grid
-    padding: 16px
->>>>>>> 7742d971c9f8102245d8997e11a81898e308d585
+    padding: 12px 10px
 
     .days-header
       display: grid
       grid-template-columns: repeat(7, 1fr)
-<<<<<<< HEAD
-      gap: 6px
-=======
-      gap: 8px
->>>>>>> 7742d971c9f8102245d8997e11a81898e308d585
+      gap: 4px
       margin-bottom: 8px
 
       .day-label
         text-align: center
-<<<<<<< HEAD
-        font-size: 11px
+        font-size: 10px
         font-weight: 500
         color: rgba(0, 0, 0, 0.6)
-        padding: 6px
+        padding: 6px 4px
         background: rgba(0, 0, 0, 0.02)
         border-radius: 4px
 
@@ -163,28 +101,34 @@
   .calendar-container
     .calendar-header
       .calendar-controls
+        gap: 6px
+
         .month-nav
           .current-date
-            font-size: 12px
-            min-width: 110px
+            font-size: 11px
+            min-width: 90px
 
         .view-controls
           .view-toggle
             button
-              min-width: 36px
-              padding: 3px 4px
+              min-width: 32px
+              padding: 2px
               font-size: 10px
 
 @media screen and (max-width: 576px)
   .calendar-container
     .calendar-header
+      padding: 8px 10px
+      
       .calendar-controls
-        gap: 6px
+        gap: 4px
 
         .month-nav
+          gap: 4px
+          
           .current-date
-            font-size: 12px
-            min-width: 90px
+            font-size: 11px
+            min-width: 85px
 
         .view-controls
           .view-toggle
@@ -192,25 +136,14 @@
 
           .view-toggle-btn
             display: block
+            padding: 4px
 
     .calendar-grid
-      padding: 12px
+      padding: 10px 8px
 
       .days-header
-        gap: 4px
+        gap: 2px
         
         .day-label
           font-size: 10px
           padding: 4px 2px
-=======
-        font-size: 12px
-        font-weight: 500
-        color: rgba(0, 0, 0, 0.6)
-        padding: 8px
-        background: rgba(0, 0, 0, 0.02)
-        border-radius: 4px
-
-        @media (max-width: 576px)
-          font-size: 11px
-          padding: 6px 4px
->>>>>>> 7742d971c9f8102245d8997e11a81898e308d585
