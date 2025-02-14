@@ -47,12 +47,21 @@
               display: none
 
     .footer-container
-      padding: 20px
+      padding: 0
 
       .bottom-actions
+        max-width: 72px
+        
         .action-item
           justify-content: center
-          padding: 8px
+          padding: 12px 4px
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05)
+          
+          &:last-child
+            border-bottom: none
+
+          mat-icon
+            margin-right: 0
 
           span
             display: none

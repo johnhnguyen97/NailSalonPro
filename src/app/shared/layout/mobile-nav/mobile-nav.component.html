@@ -1,4 +1,10 @@
 <nav class="mobile-nav" [class.collapsed]="isCollapsed$ | async">
+  <div class="profile-container">
+    <div class="profile-image">
+      <img src="assets/profile-images/profile.png" alt="User Profile">
+      <span class="status-badge">●</span>
+    </div>
+  </div>
   <a class="nav-item" routerLink="/dashboard" routerLinkActive="active">
     <mat-icon>dashboard</mat-icon>
     <span>Dashboard</span>
