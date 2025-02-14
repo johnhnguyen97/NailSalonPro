@@ -3,6 +3,7 @@
   <mat-card-content>
     <div class="calendar-header">
       <div class="calendar-controls">
+<<<<<<< HEAD
         <!-- Left Side: Today Button -->
         <button mat-icon-button (click)="goToToday()" class="today-btn">
           <mat-icon>today</mat-icon>
@@ -14,10 +15,19 @@
             <mat-icon>chevron_left</mat-icon>
           </button>
           <span class="current-date">{{ currentDate | date:'MMM d, yyyy' }}</span>
+=======
+        <!-- Left Side Controls -->
+        <div class="nav-controls">
+          <button mat-icon-button (click)="navigate('prev')">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <span class="current-date">{{ currentDate | date:'MMM yyyy' }}</span>
+>>>>>>> 7742d971c9f8102245d8997e11a81898e308d585
           <button mat-icon-button (click)="navigate('next')">
             <mat-icon>chevron_right</mat-icon>
           </button>
         </div>
+<<<<<<< HEAD
 
         <!-- Right Side: View Toggle -->
         <div class="view-controls">
@@ -29,6 +39,23 @@
               {{view | titlecase}}
             </button>
           </div>
+=======
+        
+        <!-- Right Side Controls -->
+        <div class="action-controls">
+          <button mat-icon-button (click)="goToToday()" class="today-btn">
+            <mat-icon>today</mat-icon>
+          </button>
+          <button mat-icon-button class="view-toggle-btn">
+            <mat-icon>calendar_view_month</mat-icon>
+          </button>
+          <mat-button-toggle-group [value]="calendarView" class="view-toggle mobile-hidden">
+            <mat-button-toggle value="day">Day</mat-button-toggle>
+            <mat-button-toggle value="week">Week</mat-button-toggle>
+            <mat-button-toggle value="month">Month</mat-button-toggle>
+            <mat-button-toggle value="year">Year</mat-button-toggle>
+          </mat-button-toggle-group>
+>>>>>>> 7742d971c9f8102245d8997e11a81898e308d585
         </div>
       </div>
     </div>

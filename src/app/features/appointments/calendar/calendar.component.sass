@@ -5,13 +5,18 @@
   overflow: hidden
 
   .calendar-header
+<<<<<<< HEAD
     padding: 12px 16px
+=======
+    padding: 16px
+>>>>>>> 7742d971c9f8102245d8997e11a81898e308d585
     border-bottom: 1px solid rgba(0, 0, 0, 0.05)
 
     .calendar-controls
       display: flex
       align-items: center
       justify-content: space-between
+<<<<<<< HEAD
       gap: 12px
 
       .today-btn
@@ -83,15 +88,70 @@
 
   .calendar-grid
     padding: 12px
+=======
+      gap: 24px
+
+      @media (max-width: 576px)
+        gap: 12px
+        
+        .nav-controls
+          .current-date
+            font-size: 14px
+            min-width: 80px
+
+        .action-controls
+          gap: 8px
+
+      .nav-controls
+        display: flex
+        align-items: center
+        gap: 16px
+
+        .current-date
+          font-size: 16px
+          font-weight: 500
+          color: rgba(0, 0, 0, 0.87)
+          min-width: 100px
+          text-align: center
+
+      .action-controls
+        display: flex
+        align-items: center
+        gap: 16px
+
+        .view-toggle
+          ::ng-deep
+            .mat-button-toggle-group
+              border-radius: 8px
+              border: 1px solid rgba(0, 0, 0, 0.12)
+              
+            .mat-button-toggle
+              background: white
+              color: rgba(0, 0, 0, 0.6)
+              font-size: 13px
+              padding: 0 16px
+              
+              &.mat-button-toggle-checked
+                background: rgba(0, 0, 0, 0.05)
+                color: #ff4081
+
+  .calendar-grid
+    padding: 16px
+>>>>>>> 7742d971c9f8102245d8997e11a81898e308d585
 
     .days-header
       display: grid
       grid-template-columns: repeat(7, 1fr)
+<<<<<<< HEAD
       gap: 6px
+=======
+      gap: 8px
+>>>>>>> 7742d971c9f8102245d8997e11a81898e308d585
       margin-bottom: 8px
 
       .day-label
         text-align: center
+<<<<<<< HEAD
         font-size: 11px
         font-weight: 500
         color: rgba(0, 0, 0, 0.6)
@@ -142,3 +202,15 @@
         .day-label
           font-size: 10px
           padding: 4px 2px
+=======
+        font-size: 12px
+        font-weight: 500
+        color: rgba(0, 0, 0, 0.6)
+        padding: 8px
+        background: rgba(0, 0, 0, 0.02)
+        border-radius: 4px
+
+        @media (max-width: 576px)
+          font-size: 11px
+          padding: 6px 4px
+>>>>>>> 7742d971c9f8102245d8997e11a81898e308d585
