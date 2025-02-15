@@ -1,12 +1,6 @@
 .dashboard-container
-  padding: 24px
-  max-width: 1200px
-  margin: 0 auto
   width: 100%
   transition: all 0.3s ease
-
-  &.sidebar-collapsed
-    max-width: 1328px // 1200px + 128px (difference from expanded to collapsed sidebar)
 
   .stats-grid
     display: grid
@@ -90,35 +84,14 @@
             opacity: 0.8
 
 // Responsive adjustments
-// Responsive adjustments
-@media screen and (max-width: 1200px)
-  .dashboard-container
-    max-width: calc(100% - 48px)
-    transition: max-width 0.3s ease, padding 0.3s ease
-    
-    &.sidebar-collapsed
-      max-width: calc(100% - 48px)
-    
-    .stats-grid
-      gap: 20px
-      transition: gap 0.3s ease
-
 @media screen and (max-width: 992px)
   .dashboard-container
     .stats-grid
       gap: 16px
       grid-template-columns: repeat(2, 1fr)
-      transition: all 0.3s ease
-
-    .activity-card
-      transition: all 0.3s ease
 
 @media screen and (max-width: 768px)
   .dashboard-container
-    padding: 16px
-    max-width: 100%
-    transition: all 0.3s ease
-    
     .stats-grid
       grid-template-columns: 1fr
       gap: 16px
@@ -126,16 +99,12 @@
     .activity-card
       mat-card-header
         padding: 16px 16px 0
-        transition: padding 0.3s ease
 
       .activity-list
         padding: 0 16px 16px
-        transition: padding 0.3s ease
 
 @media screen and (max-width: 576px)
   .dashboard-container
-    padding: 12px
-    
     .stats-grid
       gap: 12px
 
