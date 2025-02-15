@@ -2,22 +2,19 @@
   display: flex
   flex-direction: column
   min-height: 0
-  width: 100%
+  padding: 24px
   box-sizing: border-box
+  width: 100%
+  max-width: 100%
+  margin: 56px 0 0
 
-  .page-content
-    flex: 1
-    min-height: 0
-    display: flex
-    flex-direction: column
+// Responsive styles
+@media screen and (max-width: 992px)
+  .page-container
+    padding: 20px
+    margin-top: 56px
 
-    // Card layouts
-    .card-grid
-      display: grid
-      gap: 24px
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))
-
-    .card-list
-      display: flex
-      flex-direction: column
-      gap: 16px
+@media screen and (max-width: 576px)
+  .page-container
+    padding: 16px
+    margin-top: 56px

@@ -5,29 +5,20 @@ html, body
   font-family: Roboto, "Helvetica Neue", sans-serif
   background: #f5f5f5
 
-// Remove outlines from containers
-.mat-mdc-card
-  outline: none !important
-  &:focus, &:active
-    outline: none !important
-  & > *
-    outline: none !important
-
-mat-card
-  outline: none !important
-  &:focus, &:active
-    outline: none !important
-
-.container, .mdc-card, .mat-mdc-card-content, .mdc-card__content, .mat-mdc-card-actions
-  outline: none !important
-  &::before, &::after
-    outline: none !important
-
-// Material overrides for container elements
-.mdc-card__primary-action
-  outline: none !important
-  &::before, &::after
-    outline: none !important
+// Material card containment
+.mat-mdc-card, mat-card
+  box-sizing: border-box !important
+  max-width: 100% !important
+  margin: 0 !important
+  overflow: hidden !important
 
 .mat-mdc-card-content
-  outline: none !important
+  box-sizing: border-box !important
+  max-width: 100% !important
+  overflow: hidden !important
+
+// Container overflow prevention
+.container, .content-container
+  box-sizing: border-box !important
+  max-width: 100% !important
+  overflow: hidden !important

@@ -2,18 +2,25 @@
   width: 100%
   transition: all 0.3s ease
   padding: 20px
+  box-sizing: border-box
+  display: flex
+  flex-direction: column
+  gap: 24px
 
   .stats-grid
     display: grid
-    grid-template-columns: repeat(3, 1fr)
+    grid-template-columns: repeat(3, minmax(0, 1fr))
     gap: 24px
-    margin-bottom: 24px
+    margin: 0
+    padding: 0
 
     .stat-card
       background: white
       border-radius: 12px
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05)
       outline: none
+      margin: 0
+      min-width: 0
       
       .stat-content
         display: flex
@@ -27,13 +34,19 @@
           height: 32px
           color: #ff4081
           opacity: 0.9
+          flex-shrink: 0
 
         .stat-info
+          min-width: 0
+          flex: 1
           h3
             margin: 0
             font-size: 14px
             color: #666
             font-weight: 500
+            white-space: nowrap
+            overflow: hidden
+            text-overflow: ellipsis
 
           .stat-value
             margin: 8px 0 0
@@ -46,40 +59,49 @@
     border-radius: 12px
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05)
     outline: none
+    margin: 0
 
     mat-card-header
       padding: 20px 20px 0
+      margin: 0
 
       mat-card-title
         font-size: 18px
         font-weight: 500
         color: #2c3e50
+        margin: 0
 
     .activity-list
       padding: 0 20px 20px
+      margin: 0
 
       .activity-item
         display: flex
         align-items: flex-start
         padding: 16px 0
         border-bottom: 1px solid rgba(0, 0, 0, 0.08)
+        gap: 16px
         
         &:last-child
           border-bottom: none
 
         .activity-icon
           color: #666
-          margin-right: 16px
           font-size: 20px
           opacity: 0.8
+          flex-shrink: 0
 
         .activity-details
           flex: 1
+          min-width: 0
 
           .activity-text
             margin: 0
             font-size: 14px
             color: #2c3e50
+            white-space: nowrap
+            overflow: hidden
+            text-overflow: ellipsis
 
           .activity-time
             font-size: 12px
@@ -90,9 +112,11 @@
 @media screen and (max-width: 992px)
   .dashboard-container
     padding: 16px
+    gap: 16px
+    
     .stats-grid
-      gap: 16px
       grid-template-columns: repeat(2, 1fr)
+      gap: 16px
 
 @media screen and (max-width: 768px)
   .dashboard-container
@@ -110,6 +134,8 @@
 @media screen and (max-width: 576px)
   .dashboard-container
     padding: 12px
+    gap: 12px
+    
     .stats-grid
       gap: 12px
 
@@ -119,5 +145,4 @@
         gap: 8px
         
         .activity-icon
-          margin-right: 0
           margin-bottom: 4px
