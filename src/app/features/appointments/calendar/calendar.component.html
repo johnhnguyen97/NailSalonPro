@@ -1,67 +1,79 @@
 <app-page-container>
-  <div class="page-content">
-    <mat-card class="calendar-container">
-  <!-- Calendar Header with Controls -->
-  <mat-card-content>
-    <div class="calendar-header">
-      <div class="calendar-controls">
-        <!-- Left Side: Today Button -->
-        <button mat-icon-button (click)="goToToday()" class="today-btn">
-          <mat-icon>today</mat-icon>
-        </button>
-
-        <!-- Center: Month Navigation -->
-        <div class="month-nav">
-          <button mat-icon-button (click)="navigate('prev')">
-            <mat-icon>chevron_left</mat-icon>
+  <div class="calendar-container">
+    <mat-card>
+      <div class="calendar-header">
+        <div class="calendar-controls">
+          <!-- Left Side: Today Button -->
+          <button mat-stroked-button class="today-btn" (click)="goToToday()">
+            <mat-icon>today</mat-icon>
+            Today
           </button>
-          <span class="current-date">{{ currentDate | date:'MMM d, yyyy' }}</span>
-          <button mat-icon-button (click)="navigate('next')">
-            <mat-icon>chevron_right</mat-icon>
-          </button>
-        </div>
 
-        <!-- Right Side: View Toggle -->
-        <div class="view-controls">
-          <div class="view-toggle">
-            <button mat-button 
-                    *ngFor="let view of views; let first = first; let last = last" 
-                    [class.active]="calendarView === view"
-                    [class.first]="first"
-                    [class.last]="last"
-                    (click)="setView(view)">
-              {{view | titlecase}}
+          <!-- Center: Month Navigation -->
+          <div class="month-nav">
+            <button mat-icon-button (click)="navigate('prev')">
+              <mat-icon>chevron_left</mat-icon>
+            </button>
+            <span class="current-date">{{ currentDate | date:'MMM d, yyyy' }}</span>
+            <button mat-icon-button (click)="navigate('next')">
+              <mat-icon>chevron_right</mat-icon>
             </button>
           </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Calendar Grid -->
-    <div class="calendar-grid">
-      <!-- Days Header -->
-      <div class="days-header">
-        <div class="timezone-label"><mat-icon>schedule</mat-icon></div>
-        <div class="day-label">Mon</div>
-        <div class="day-label">Tue</div>
-        <div class="day-label">Wed</div>
-        <div class="day-label">Thu</div>
-        <div class="day-label">Fri</div>
-        <div class="day-label">Sat</div>
-        <div class="day-label">Sun</div>
-      </div>
-
-      <!-- Calendar Body -->
-      <div class="calendar-body">
-        <div class="timezone-column">
-          <div class="time-slot" *ngFor="let hour of [6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]">
-            {{hour | number:'2.0-0'}}
+          <!-- Right Side: View Toggle -->
+          <div class="view-controls">
+            <div class="view-toggle">
+              <button mat-button
+                      *ngFor="let view of views" 
+                      [class.active]="calendarView === view"
+                      (click)="setView(view)">
+                {{view | titlecase}}
+              </button>
+            </div>
           </div>
         </div>
-        <!-- Other days content will go here -->
       </div>
-    </div>
-  </mat-card-content>
+
+      <div class="calendar-content">
+        <div class="calendar-grid">
+          <div class="calendar-scroll-container">
+            <div class="days-header">
+              <div class="timezone-label">
+                <mat-icon>schedule</mat-icon>
+                <span class="timezone-text">{{timezone}}</span>
+              </div>
+              <div class="day-label">Mon</div>
+              <div class="day-label">Tue</div>
+              <div class="day-label">Wed</div>
+              <div class="day-label">Thu</div>
+              <div class="day-label">Fri</div>
+              <div class="day-label">Sat</div>
+              <div class="day-label">Sun</div>
+            </div>
+
+            <div class="calendar-body">
+              <!-- Time Column -->
+              <div class="timezone-column">
+                <div class="time-slot" *ngFor="let hour of hours">
+                  {{formatHour(hour)}}:00
+                </div>
+              </div>
+              
+              <!-- Day columns -->
+              <div class="calendar-columns">
+                <div class="day-column" *ngFor="let day of days">
+                  <div class="time-slot" *ngFor="let hour of hours"></div>
+                </div>
+              </div>
+
+              <!-- Current Time Indicator -->
+              <div class="current-time-indicator" [style.top.px]="currentTimePosition">
+                <div class="time-marker"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </mat-card>
   </div>
 </app-page-container>
