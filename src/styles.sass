@@ -1,55 +1,33 @@
-@use '@angular/material' as mat
-
-:root
-  // Light theme variables
-  --background-color: #fafafa
-  --text-color: rgba(0, 0, 0, 0.87)
-  --secondary-text: rgba(0, 0, 0, 0.6)
-  --border-color: rgba(0, 0, 0, 0.12)
-  --card-background: #ffffff
-  --hover-background: rgba(0, 0, 0, 0.04)
-
-.dark-theme
-  // Dark theme variables
-  --background-color: #303030
-  --text-color: #ffffff
-  --secondary-text: rgba(255, 255, 255, 0.7)
-  --border-color: rgba(255, 255, 255, 0.12)
-  --card-background: #424242
-  --hover-background: rgba(255, 255, 255, 0.08)
-  
-  // Override Material theme
-  @import '@angular/material/prebuilt-themes/purple-green.css'
-
+// Global styles
 html, body
-  margin: 0
-  padding: 0
   height: 100%
+  margin: 0
   font-family: Roboto, "Helvetica Neue", sans-serif
+  background: #f5f5f5
 
-body
-  background-color: var(--background-color)
-  color: var(--text-color)
-  transition: background-color 0.3s ease, color 0.3s ease
-
-*, *::before, *::after
-  box-sizing: border-box
-
-// Light theme by default
-@import '@angular/material/prebuilt-themes/indigo-pink.css'
-
-// Custom styles for themed elements
+// Remove outlines from containers
 .mat-mdc-card
-  background-color: var(--card-background)
-  color: var(--text-color)
+  outline: none !important
+  &:focus, &:active
+    outline: none !important
+  & > *
+    outline: none !important
 
-.mat-mdc-list-item
-  color: var(--text-color)
-  &:hover
-    background-color: var(--hover-background)
+mat-card
+  outline: none !important
+  &:focus, &:active
+    outline: none !important
 
-.mat-divider
-  border-color: var(--border-color)
+.container, .mdc-card, .mat-mdc-card-content, .mdc-card__content, .mat-mdc-card-actions
+  outline: none !important
+  &::before, &::after
+    outline: none !important
 
-.secondary-text
-  color: var(--secondary-text)
+// Material overrides for container elements
+.mdc-card__primary-action
+  outline: none !important
+  &::before, &::after
+    outline: none !important
+
+.mat-mdc-card-content
+  outline: none !important

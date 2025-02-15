@@ -32,10 +32,7 @@ html, body
     overflow: hidden
     margin-left: 0
     transition: margin-left 0.3s ease
-
-    app-header
-      .logo-container
-        height: 56px // Match sidebar logo container height
+    padding-top: 56px // Height of logo container
 
     router-outlet
       display: none
@@ -46,7 +43,6 @@ html, body
       flex-direction: column
       min-height: 0
       overflow-y: auto
-      margin-top: 56px // Match logo container height
 
   &.sidebar-collapsed
     app-sidebar
