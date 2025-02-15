@@ -41,6 +41,7 @@
     <div class="calendar-grid">
       <!-- Days Header -->
       <div class="days-header">
+        <div class="timezone-label"><mat-icon>schedule</mat-icon></div>
         <div class="day-label">Mon</div>
         <div class="day-label">Tue</div>
         <div class="day-label">Wed</div>
@@ -48,6 +49,16 @@
         <div class="day-label">Fri</div>
         <div class="day-label">Sat</div>
         <div class="day-label">Sun</div>
+      </div>
+
+      <!-- Calendar Body -->
+      <div class="calendar-body">
+        <div class="timezone-column">
+          <div class="time-slot" *ngFor="let hour of [6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]">
+            {{hour | number:'2.0-0'}}
+          </div>
+        </div>
+        <!-- Other days content will go here -->
       </div>
     </div>
   </mat-card-content>
