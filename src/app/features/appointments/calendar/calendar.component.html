@@ -21,50 +21,29 @@
             </button>
           </div>
 
-          <div class="actions-section">
-            <div class="timezone-select">
-              <mat-form-field appearance="outline" class="dense-field">
-                <mat-select [(ngModel)]="currentTimezone">
-                  <mat-option *ngFor="let tz of timeZones" [value]="tz.value">
-                    {{ tz.label }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-
-            <button mat-flat-button color="primary" class="new-appointment-btn">
-              <mat-icon>add</mat-icon>
-              <span>New</span>
-            </button>
-          </div>
+          <button mat-flat-button color="primary" class="new-appointment-btn">
+            <mat-icon>add</mat-icon>
+            <span>New</span>
+          </button>
         </div>
       </div>
 
       <div class="calendar-content">
         <div class="calendar-grid">
           <div class="calendar-header">
-            <div class="header-cell time-header">Time</div>
+            <div class="header-cell time-header"></div>
             <div class="header-cell" *ngFor="let day of weekDays">{{ day }}</div>
           </div>
 
           <div class="calendar-body">
             <div class="time-slots">
-              <div class="time-slot" *ngFor="let hour of timeSlots">
-                {{ hour }}
-              </div>
+              <div class="time-slot" *ngFor="let hour of timeSlots">{{ hour }}</div>
             </div>
             
             <div class="week-grid">
               <div class="day-column" *ngFor="let day of weekDays">
                 <div class="time-slot" *ngFor="let hour of timeSlots">
-                  <div class="appointments">
-                    <div class="appointment" *ngIf="hasAppointment(day, hour)">
-                      <div class="appointment-content">
-                        <span class="time">{{hour}}</span>
-                        <span class="title">Client Meeting</span>
-                      </div>
-                    </div>
-                  </div>
+                  <!-- Empty cell for appointments -->
                 </div>
               </div>
             </div>
