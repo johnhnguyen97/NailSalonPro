@@ -1,0 +1,273 @@
+@import '../../../styles/mixins'
+
+.settings-container
+  @include card-container
+
+  mat-card
+    @include base-card
+
+    .settings-header
+      @include card-header
+
+    mat-accordion
+      @include table-container
+      padding: var(--spacing-lg)
+
+      .section-icon
+        margin-right: var(--spacing-md)
+        color: var(--text-secondary)
+        font-size: var(--font-size-md)
+        width: var(--font-size-md)
+        height: var(--font-size-md)
+        vertical-align: middle
+
+      ::ng-deep .mat-expansion-panel
+        margin-bottom: var(--spacing-lg)
+        border-radius: var(--border-radius) !important
+        box-shadow: var(--card-shadow) !important
+        overflow: hidden
+        font-family: var(--font-family)
+
+        &:last-child
+          margin-bottom: 0
+
+        .mat-expansion-panel-header
+          height: 56px
+          padding: 0 var(--spacing-xl)
+
+          &:hover:not([aria-disabled=true])
+            background: var(--hover-color)
+
+          .mat-expansion-panel-header-title
+            color: var(--text-primary)
+            font-weight: var(--font-weight-medium)
+            font-size: var(--font-size-md)
+            margin-right: 0
+            align-items: center
+
+      .settings-section
+        @include section-content
+
+        h3
+          margin: 0 0 var(--spacing-xl)
+          font-size: var(--font-size-md)
+          font-weight: var(--font-weight-medium)
+          color: var(--text-primary)
+
+        .full-width
+          width: 100%
+          margin-bottom: var(--spacing-xl)
+
+          &:last-child
+            margin-bottom: 0
+
+          mat-label
+            font-size: var(--font-size-sm)
+            color: var(--text-secondary)
+
+        .section-divider
+          margin-top: var(--spacing-xxl)
+          margin-bottom: var(--spacing-xl)
+
+        // Business Hours Styles
+        .business-hours
+          margin-top: var(--spacing-xl)
+
+          .day-hours
+            display: flex
+            align-items: center
+            gap: var(--spacing-xl)
+            margin-bottom: var(--spacing-lg)
+            padding: var(--spacing-lg)
+            border-radius: var(--border-radius)
+            background: var(--background-lighter)
+            
+            &:last-child
+              margin-bottom: 0
+
+            mat-checkbox
+              min-width: 120px
+              font-size: var(--font-size-sm)
+
+            .hours-inputs
+              display: flex
+              align-items: center
+              gap: var(--spacing-lg)
+              flex: 1
+
+              mat-form-field
+                flex: 1
+                margin-bottom: 0
+
+                &::ng-deep .mat-mdc-form-field-subscript-wrapper
+                  display: none
+
+              .separator
+                color: var(--text-secondary)
+                font-size: var(--font-size-sm)
+                margin: 0 var(--spacing-xs)
+
+        // Contact Info Styles
+        .contact-info
+          margin-top: var(--spacing-xl)
+
+          mat-form-field
+            margin-bottom: var(--spacing-xl)
+
+            &:last-child
+              margin-bottom: 0
+
+            mat-icon
+              color: var(--text-secondary)
+
+        // Account Security Styles
+        .update-btn
+          margin-top: var(--spacing-sm)
+          width: 100%
+          max-width: 200px
+          height: 36px
+          font-size: var(--font-size-sm)
+
+        // Theme Selector Styles
+        .theme-selector
+          margin-bottom: var(--spacing-xxl)
+
+          mat-radio-group
+            display: flex
+            gap: var(--spacing-xxl)
+
+            mat-radio-button
+              font-size: var(--font-size-sm)
+
+        // Color Selector Styles
+        .color-selector
+          margin-bottom: var(--spacing-xxl)
+
+          .color-options
+            display: flex
+            gap: var(--spacing-lg)
+            margin-top: var(--spacing-lg)
+
+            button
+              width: 36px
+              height: 36px
+
+              &.selected
+                border: 2px solid #fff
+                outline: 2px solid currentColor
+
+              mat-icon
+                font-size: var(--font-size-base)
+                height: var(--font-size-base)
+                width: var(--font-size-base)
+
+        // Notifications List Styles
+        .notifications-list
+          mat-list
+            padding: 0
+
+            mat-list-item
+              height: auto !important
+              margin-bottom: var(--spacing-lg)
+              border-radius: var(--border-radius)
+              background: var(--background-lighter)
+              padding: var(--spacing-lg) !important
+
+              &:last-child
+                margin-bottom: 0
+
+              mat-icon
+                margin-right: var(--spacing-lg)
+                color: var(--text-secondary)
+                font-size: var(--font-size-md)
+
+              .mat-line
+                white-space: normal
+                font-size: var(--font-size-sm)
+
+              .subtitle
+                font-size: var(--font-size-xs)
+                color: var(--text-secondary)
+                margin-top: var(--spacing-xs)
+
+              mat-slide-toggle
+                margin-left: var(--spacing-lg)
+
+          .reminder-settings
+            margin-top: var(--spacing-xxl)
+            display: flex
+            gap: var(--spacing-xl)
+
+            mat-form-field
+              flex: 1
+              max-width: 300px
+
+              ::ng-deep .mat-mdc-form-field-subscript-wrapper
+                display: none
+
+@media screen and (max-width: 768px)
+  .settings-container
+    mat-card
+      .settings-section
+        padding: var(--spacing-xl) var(--spacing-lg)
+
+        .reminder-settings
+          flex-direction: column
+          gap: var(--spacing-lg)
+
+          mat-form-field
+            max-width: none
+
+        .theme-selector, .density-selector
+          mat-radio-group
+            flex-direction: column
+            gap: var(--spacing-lg)
+
+@media screen and (max-width: 600px)
+  .settings-container
+    mat-card
+      .settings-header
+        padding: var(--spacing-lg)
+
+        h2
+          font-size: var(--font-size-lg)
+
+      mat-accordion
+        padding: var(--spacing-md)
+
+        .settings-section
+          padding: var(--spacing-lg) var(--spacing-md)
+
+          .business-hours
+            .day-hours
+              flex-direction: column
+              align-items: stretch
+              padding: var(--spacing-lg)
+              
+              mat-checkbox
+                margin-bottom: var(--spacing-lg)
+
+              .hours-inputs
+                flex-direction: column
+                gap: var(--spacing-md)
+                
+                .separator
+                  align-self: center
+                  margin: var(--spacing-xs) 0
+
+          .notifications-list
+            mat-list-item
+              flex-direction: column
+              align-items: flex-start
+              gap: var(--spacing-lg)
+
+              mat-slide-toggle
+                align-self: flex-end
+                margin: var(--spacing-sm) 0 0
+
+          .contact-info
+            mat-form-field
+              margin-bottom: var(--spacing-lg)
+
+          .full-width
+            margin-bottom: var(--spacing-lg)

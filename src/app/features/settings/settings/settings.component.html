@@ -1,1 +1,230 @@
-<p>settings works!</p>
+<app-page-container>
+  <div class="settings-container">
+    <mat-card>
+      <div class="settings-header">
+        <h2>Settings</h2>
+      </div>
+
+      <mat-accordion>
+        <!-- Business Profile Section -->
+        <mat-expansion-panel expanded>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon class="section-icon">business</mat-icon>
+              Business Profile
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="settings-section">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Business Name</mat-label>
+              <input matInput placeholder="Enter your business name" [(ngModel)]="businessInfo.name" name="businessName">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Website Title</mat-label>
+              <input matInput placeholder="Enter website title" [(ngModel)]="businessInfo.websiteTitle" name="websiteTitle">
+              <mat-hint>This appears in the browser tab</mat-hint>
+            </mat-form-field>
+
+            <div class="contact-info">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Business Email</mat-label>
+                <input matInput type="email" placeholder="Enter business email" [(ngModel)]="businessInfo.email" name="businessEmail">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Phone Number</mat-label>
+                <input matInput placeholder="Enter phone number" [(ngModel)]="businessInfo.phone" name="businessPhone">
+                <mat-icon matSuffix>phone</mat-icon>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Business Address</mat-label>
+                <textarea matInput rows="2" placeholder="Enter business address" [(ngModel)]="businessInfo.address" name="businessAddress"></textarea>
+                <mat-icon matSuffix>location_on</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-expansion-panel>
+
+        <!-- Business Hours & Location -->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon class="section-icon">schedule</mat-icon>
+              Business Hours & Location
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="settings-section">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Time Zone</mat-label>
+              <mat-select [(ngModel)]="businessInfo.timezone" name="timezone">
+                <mat-option value="america/chicago">Central Time (US & Canada)</mat-option>
+                <mat-option value="america/new_york">Eastern Time (US & Canada)</mat-option>
+                <mat-option value="america/los_angeles">Pacific Time (US & Canada)</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div class="business-hours">
+              <h3>Business Hours</h3>
+              <div class="day-hours" *ngFor="let day of workDays">
+                <mat-checkbox [(ngModel)]="businessHours[day].active" [name]="'active_' + day">{{day}}</mat-checkbox>
+                <div class="hours-inputs">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Open</mat-label>
+                    <input matInput type="time" [(ngModel)]="businessHours[day].start" [name]="'start_' + day">
+                  </mat-form-field>
+                  <span class="separator">to</span>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Close</mat-label>
+                    <input matInput type="time" [(ngModel)]="businessHours[day].end" [name]="'end_' + day">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+
+        <!-- Account & Security -->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon class="section-icon">security</mat-icon>
+              Account & Security
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="settings-section">
+            <h3>Change Password</h3>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Current Password</mat-label>
+              <input matInput type="password">
+              <mat-icon matSuffix>lock</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>New Password</mat-label>
+              <input matInput type="password">
+              <mat-icon matSuffix>lock_open</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Confirm New Password</mat-label>
+              <input matInput type="password">
+              <mat-icon matSuffix>lock_open</mat-icon>
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="update-btn">
+              Update Password
+            </button>
+
+            <h3 class="section-divider">Two-Factor Authentication</h3>
+            <mat-slide-toggle>Enable Two-Factor Authentication</mat-slide-toggle>
+          </div>
+        </mat-expansion-panel>
+
+        <!-- Appearance -->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon class="section-icon">palette</mat-icon>
+              Appearance
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="settings-section">
+            <div class="theme-selector">
+              <h3>Theme Mode</h3>
+              <mat-radio-group [(ngModel)]="appearanceSettings.theme" name="theme">
+                <mat-radio-button value="light">Light</mat-radio-button>
+                <mat-radio-button value="dark">Dark</mat-radio-button>
+                <mat-radio-button value="system">System Default</mat-radio-button>
+              </mat-radio-group>
+            </div>
+
+            <div class="color-selector">
+              <h3>Primary Color</h3>
+              <div class="color-options">
+                <button mat-mini-fab [class.selected]="true" color="primary">
+                  <mat-icon>check</mat-icon>
+                </button>
+                <button mat-mini-fab style="background-color: #2196f3"></button>
+                <button mat-mini-fab style="background-color: #4caf50"></button>
+                <button mat-mini-fab style="background-color: #ff4081"></button>
+                <button mat-mini-fab style="background-color: #9c27b0"></button>
+              </div>
+            </div>
+
+            <div class="density-selector">
+              <h3>Interface Density</h3>
+              <mat-radio-group [(ngModel)]="appearanceSettings.density" name="density">
+                <mat-radio-button value="comfortable">Comfortable</mat-radio-button>
+                <mat-radio-button value="compact">Compact</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </mat-expansion-panel>
+
+        <!-- Notifications -->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon class="section-icon">notifications</mat-icon>
+              Notifications
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="settings-section">
+            <div class="notifications-list">
+              <mat-list>
+                <mat-list-item>
+                  <mat-icon matListIcon>email</mat-icon>
+                  <div matLine>Email Notifications</div>
+                  <div matLine class="subtitle">Receive appointment notifications via email</div>
+                  <mat-slide-toggle [(ngModel)]="notificationSettings.email" name="emailNotifications"></mat-slide-toggle>
+                </mat-list-item>
+
+                <mat-list-item>
+                  <mat-icon matListIcon>sms</mat-icon>
+                  <div matLine>SMS Notifications</div>
+                  <div matLine class="subtitle">Receive appointment notifications via SMS</div>
+                  <mat-slide-toggle [(ngModel)]="notificationSettings.sms" name="smsNotifications"></mat-slide-toggle>
+                </mat-list-item>
+
+                <mat-list-item>
+                  <mat-icon matListIcon>alarm</mat-icon>
+                  <div matLine>Browser Notifications</div>
+                  <div matLine class="subtitle">Show desktop notifications</div>
+                  <mat-slide-toggle [(ngModel)]="notificationSettings.browser" name="browserNotifications"></mat-slide-toggle>
+                </mat-list-item>
+              </mat-list>
+
+              <div class="reminder-settings">
+                <h3>Default Reminder Settings</h3>
+                <mat-form-field appearance="outline">
+                  <mat-label>Email Reminder</mat-label>
+                  <mat-select [(ngModel)]="notificationSettings.emailReminderTime" name="emailReminderTime">
+                    <mat-option value="24">24 hours before</mat-option>
+                    <mat-option value="48">48 hours before</mat-option>
+                    <mat-option value="72">72 hours before</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>SMS Reminder</mat-label>
+                  <mat-select [(ngModel)]="notificationSettings.smsReminderTime" name="smsReminderTime">
+                    <mat-option value="1">1 hour before</mat-option>
+                    <mat-option value="2">2 hours before</mat-option>
+                    <mat-option value="24">24 hours before</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card>
+  </div>
+</app-page-container>

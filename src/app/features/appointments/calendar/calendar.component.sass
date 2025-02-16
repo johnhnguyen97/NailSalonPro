@@ -1,320 +1,237 @@
+@import '../../../styles/mixins'
+@import '../../../styles/grid-mixins'
+
 .calendar-container
-  width: 100%
-  height: 100vh
-  padding: 16px 0
-  display: flex
-  flex-direction: column
+  @include card-container
 
   mat-card
-    background: white
-    border-radius: 8px
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08)
-    outline: none
-    margin: 0 16px
-    height: calc(100vh - 32px)
-    display: flex
-    flex-direction: column
-    overflow: hidden
+    @include base-card
+    @include grid-container
 
     .calendar-header
-      flex: 0 0 auto
-      display: flex
-      align-items: center
+      flex-shrink: 0
+      padding: var(--spacing-md) var(--spacing-lg)
+      border-bottom: 1px solid var(--border-color)
       background: white
-      z-index: 100
-      padding: 16px 16px 12px
-      border-bottom: 1px solid #e0e0e0
 
       .calendar-controls
-        display: grid
-        grid-template-columns: auto 1fr auto
+        display: flex
         align-items: center
-        width: 100%
-        gap: 24px
-
-        .today-btn
-          white-space: nowrap
-          min-width: fit-content
-          justify-self: start
-          height: 36px
-          border-radius: 18px
-          padding: 0 16px
-          color: rgba(0, 0, 0, 0.87)
-          border: 1px solid rgba(0, 0, 0, 0.12)
-
-          mat-icon
-            margin-right: 4px
-            font-size: 18px
-            height: 18px
-            width: 18px
-
-          &::after
-            display: none
-
-        .month-nav
-          display: flex
-          align-items: center
-          justify-content: center
-          gap: 16px
-          justify-self: center
-
-          button
-            color: rgba(0, 0, 0, 0.54)
-            
-            &::after
-              display: none
-            
-          .current-date
-            font-size: 13px
-            font-weight: 500
-            color: rgba(0, 0, 0, 0.87)
-            min-width: 120px
-            text-align: center
-            white-space: nowrap
+        gap: var(--spacing-lg)
+        height: 42px
 
         .view-controls
+          .mat-button-toggle-group
+            height: 32px
+            
+            .mat-button-toggle
+              line-height: 32px
+              font-size: var(--font-size-xs)
+              padding: 0 var(--spacing-md)
+
+        .nav-section
           display: flex
           align-items: center
-          min-width: fit-content
-          justify-self: end
-          
-          .view-toggle
-            display: flex
-            align-items: stretch
-            background: rgba(0, 0, 0, 0.04)
-            border-radius: 4px
-            padding: 2px
-            height: 36px
-            gap: 2px
+          gap: var(--spacing-sm)
 
-            button
-              padding: 0 16px
-              font-size: 13px
-              color: rgba(0, 0, 0, 0.6)
-              border: none
-              background: transparent
-              border-radius: 4px
-              margin: 0
-              cursor: pointer
-              transition: all 0.2s ease
-              height: 32px
-              min-width: 64px
-              line-height: 32px
-              font-weight: 500
-              text-transform: capitalize
+          button
+            width: 32px
+            height: 32px
+            line-height: 32px
 
-              &::after
-                display: none
+          .current-date
+            font-size: var(--font-size-sm)
+            min-width: 120px
+            text-align: center
 
-              &.active
-                background-color: white
-                color: #ff4081
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1)
+        .actions-section
+          margin-left: auto
+          display: flex
+          align-items: center
+          gap: var(--spacing-md)
+
+          .timezone-select
+            .dense-field
+              width: 160px
+              margin-bottom: -1.25em // Compensate for form field spacing
+
+              ::ng-deep
+                .mat-mdc-form-field-infix
+                  padding: 8px 0
+                  min-height: 32px
+                
+                .mat-mdc-select-value
+                  font-size: var(--font-size-xs)
+
+                .mat-mdc-form-field-subscript-wrapper
+                  display: none
+
+          .new-appointment-btn
+            height: 32px
+            padding: 0 var(--spacing-md)
+            font-size: var(--font-size-xs)
+
+            mat-icon
+              font-size: 18px
+              height: 18px
+              width: 18px
+              margin-right: 4px
 
     .calendar-content
-      flex: 1
-      min-height: 0
-      padding: 16px
-      overflow: hidden
+      @include grid-body
+      padding: var(--spacing-lg)
+      display: flex
+      flex-direction: column
 
       .calendar-grid
-        height: 100%
-        display: flex
-        flex-direction: column
+        @include calendar-grid
+        flex: 1
+        min-height: 0
 
-        .calendar-scroll-container
-          flex: 1
-          display: flex
-          flex-direction: column
-          min-height: 0
-          overflow: hidden
+        .calendar-header
+          @include calendar-header
+          height: 36px
 
-          .days-header
-            flex: 0 0 auto
+          .header-cell
+            font-size: var(--font-size-xs)
+            padding: var(--spacing-xs)
+            height: 36px
+
+            &.time-header
+              background: var(--background-light)
+              border-right: 1px solid var(--border-color)
+
+        .calendar-body
+          @include calendar-body
+
+          .time-slots
+            border-right: 1px solid var(--border-color)
+            background: var(--background-light)
+            flex-shrink: 0
+            width: 60px
+
+            .time-slot
+              @include time-cell
+              font-size: var(--font-size-xs)
+              height: 50px
+              padding: var(--spacing-xs)
+              border-right: none
+
+          .week-grid
             display: grid
-            grid-template-columns: 60px repeat(7, 1fr)
-            background: #fafafa
-            border: 1px solid #e0e0e0
-            border-bottom: none
-            position: sticky
-            top: 0
-            z-index: 10
+            grid-template-columns: repeat(7, 1fr)
+            overflow-y: auto
+            @include hide-scrollbar
+            min-height: 0
 
-            .timezone-label, .day-label
-              text-align: center
-              font-size: 12px
-              font-weight: 500
-              color: rgba(0, 0, 0, 0.6)
-              padding: 12px 8px
-              height: 48px
-              display: flex
-              flex-direction: column
-              align-items: center
-              justify-content: center
-              box-sizing: border-box
-              border-right: 1px solid #e0e0e0
-              background: #fafafa
+            .day-column
+              border-right: 1px solid var(--border-color)
+              min-width: 0
 
               &:last-child
                 border-right: none
 
-            .timezone-label
-              background-color: #f5f5f5
-              position: sticky
-              left: 0
-              z-index: 2
-
-              mat-icon
-                font-size: 18px
-                width: 18px
-                height: 18px
-                color: rgba(0, 0, 0, 0.54)
-                margin-bottom: 4px
-
-              .timezone-text
-                font-size: 10px
-
-          .calendar-body
-            flex: 1
-            display: grid
-            grid-template-columns: 60px 1fr
-            background: white
-            border: 1px solid #e0e0e0
-            border-top: none
-            overflow-y: auto
-            position: relative
-
-            .timezone-column
-              background-color: #f5f5f5
-              position: sticky
-              left: 0
-              z-index: 1
-              display: flex
-              flex-direction: column
-              border-right: 1px solid #e0e0e0
-
               .time-slot
-                text-align: center
-                height: 60px
-                font-size: 12px
-                color: rgba(0, 0, 0, 0.87)
-                border-bottom: 1px solid #e0e0e0
-                display: flex
-                align-items: center
-                justify-content: center
-                background-color: #f5f5f5
-                box-sizing: border-box
-                padding: 4px
+                @include appointment-slot
+                height: 50px
 
-                &:last-child
-                  border-bottom: none
-
-            .calendar-columns
-              display: grid
-              grid-template-columns: repeat(7, 1fr)
-              min-width: 0
-              width: 100%
-
-              .day-column
-                border-right: 1px solid #e0e0e0
-
-                &:last-child
-                  border-right: none
-
-                .time-slot
-                  height: 60px
-                  border-bottom: 1px solid #e0e0e0
-                  box-sizing: border-box
-
-                  &:last-child
-                    border-bottom: none
-
-            .current-time-indicator
-              position: absolute
-              left: 0
-              right: 0
-              z-index: 5
-              pointer-events: none
-              transition: top 0.3s ease
-              
-              .time-marker
-                position: relative
-                width: calc(100% - 60px)
-                margin-left: 60px
-                height: 2px
-                background-color: #ff4081
-
-                &::before
-                  content: ''
+                .appointments
                   position: absolute
-                  left: -5px
-                  top: -4px
-                  width: 8px
-                  height: 8px
-                  background-color: #ff4081
-                  border-radius: 50%
+                  inset: 1px
+                  padding: 1px
 
-@media screen and (max-width: 992px)
-  .calendar-container
-    padding: 12px 0
+                  .appointment
+                    background: var(--background-lighter)
+                    border-radius: 4px
+                    padding: var(--spacing-xs)
+                    height: calc(100% - 2px)
+                    font-size: var(--font-size-xs)
+                    cursor: pointer
+                    transition: background-color 0.2s ease
 
-    mat-card
-      margin: 0 12px
+                    &:hover
+                      background: var(--hover-color)
 
-      .calendar-content
-        padding: 12px
+                    .appointment-content
+                      display: flex
+                      flex-direction: column
+                      gap: 2px
+                      height: 100%
+                      overflow: hidden
+
+                      .time
+                        font-weight: var(--font-weight-medium)
+                        color: var(--text-secondary)
+                        font-size: 10px
+
+                      .title
+                        white-space: nowrap
+                        overflow: hidden
+                        text-overflow: ellipsis
+                        font-size: var(--font-size-xs)
 
 @media screen and (max-width: 768px)
   .calendar-container
-    .calendar-header
-      .calendar-controls
-        flex-wrap: wrap
-        gap: 8px
-        justify-content: center
-
-        .today-btn
-          order: 2
-          width: auto
-
-        .month-nav
-          order: 1
-          width: 100%
-          justify-content: center
-
-        .view-controls
-          order: 3
-          width: auto
-
     mat-card
-      .calendar-content
-        padding: 8px
-
-        .calendar-grid
-          .days-header, .calendar-body
-            grid-template-columns: 50px repeat(7, 1fr)
-
-@media screen and (max-width: 576px)
-  .calendar-container
-    padding: 8px 0
-
-    mat-card
-      margin: 0 8px
-
       .calendar-header
-        padding: 12px 12px 8px
+        padding: var(--spacing-md)
+
+        .calendar-controls
+          flex-wrap: wrap
+          height: auto
+          gap: var(--spacing-md)
+
+          .actions-section
+            width: 100%
+            justify-content: space-between
+            margin: 0
 
       .calendar-content
-        padding: 8px
+        padding: var(--spacing-md)
+
+@media screen and (max-width: 600px)
+  .calendar-container
+    mat-card
+      .calendar-header
+        padding: var(--spacing-sm)
+
+        .calendar-controls
+          gap: var(--spacing-sm)
+
+          .timezone-select
+            width: 100%
+            
+            .dense-field
+              width: 100%
+
+          .nav-section
+            width: 100%
+            justify-content: space-between
+
+            .current-date
+              text-align: center
+              flex: 1
+
+      .calendar-content
+        padding: var(--spacing-sm)
 
         .calendar-grid
-          .days-header, .calendar-body
-            grid-template-columns: 40px repeat(7, 1fr)
+          .calendar-header
+            .header-cell
+              padding: 2px var(--spacing-xs)
+              font-size: 10px
 
-          .days-header .timezone-label
-            padding: 8px 2px
+          .calendar-body
+            .time-slots
+              width: 40px
 
-    .calendar-header
-      .calendar-controls
-        .month-nav
-          .current-date
-            min-width: 100px
+              .time-slot
+                font-size: 10px
+                padding: 2px
+
+            .week-grid
+              .day-column
+                .time-slot
+                  .appointment
+                    padding: 2px
+                    font-size: 10px

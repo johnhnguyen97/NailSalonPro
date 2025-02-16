@@ -1,9 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { PageContainerComponent } from '../../../shared/layout/page-container/page-container.component';
+import { FormsModule } from '@angular/forms';
+import { GridService } from '../../../shared/services/grid.service';
+
+// Material imports
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
-import { PageContainerComponent } from '../../../shared/layout/page-container/page-container.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-calendar',
@@ -12,80 +20,74 @@ import { PageContainerComponent } from '../../../shared/layout/page-container/pa
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
+    PageContainerComponent,
     MatCardModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatIconModule,
-    PageContainerComponent,
-    DatePipe
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
   ],
-  providers: [DatePipe]
 })
-export class CalendarComponent implements OnInit, OnDestroy {
+export class CalendarComponent implements OnInit {
+  currentView: 'month' | 'week' | 'day' = 'week';
   currentDate: Date = new Date();
-  calendarView: string = 'week';
-  views: string[] = ['day', 'week', 'month', 'year'];
-  hours: number[] = Array.from({length: 24}, (_, i) => i); // 00 to 23 hours
-  days: number[] = Array.from({length: 7}, (_, i) => i);
-  currentTimePosition: number = 0;
-  timezone: string;
-  private timeUpdateInterval: any;
-  private readonly CELL_HEIGHT = 60; // Height of each time slot in pixels
+  currentTimezone: string = 'america/chicago';
+  weekDays: string[] = [];
+  timeSlots: string[] = [];
+  timeZones: { value: string; label: string }[] = [];
 
-  constructor(private datePipe: DatePipe) {
-    // Get UTC offset
-    const offset = -new Date().getTimezoneOffset() / 60;
-    this.timezone = `UTC${offset >= 0 ? '+' : ''}${offset}`;
-    this.updateCurrentTimePosition();
+  constructor(private gridService: GridService) {}
+
+  ngOnInit(): void {
+    this.weekDays = this.gridService.getWeekDays();
+    this.timeSlots = this.gridService.getTimeSlots();
+    this.timeZones = this.gridService.getTimeZones();
+    this.initializeCalendar();
   }
 
-  formatHour(hour: number): string {
-    return hour.toString().padStart(2, '0');
+  initializeCalendar(): void {
+    // Initialize calendar data
   }
 
-  ngOnInit() {
-    this.updateCurrentTimePosition();
-    // Update time position every 30 seconds
-    this.timeUpdateInterval = setInterval(() => {
-      this.updateCurrentTimePosition();
-    }, 30000);
-  }
-
-  ngOnDestroy() {
-    if (this.timeUpdateInterval) {
-      clearInterval(this.timeUpdateInterval);
+  previousPeriod(): void {
+    switch (this.currentView) {
+      case 'month':
+        this.currentDate.setMonth(this.currentDate.getMonth() - 1);
+        break;
+      case 'week':
+        this.currentDate.setDate(this.currentDate.getDate() - 7);
+        break;
+      case 'day':
+        this.currentDate.setDate(this.currentDate.getDate() - 1);
+        break;
     }
+    this.currentDate = new Date(this.currentDate);
   }
 
-  updateCurrentTimePosition() {
-    const now = new Date();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    
-    // Calculate position based on cell height
-    const hoursFromMidnight = hours + (minutes / 60);
-    this.currentTimePosition = hoursFromMidnight * this.CELL_HEIGHT;
-
-    // Force immediate update if needed
-    requestAnimationFrame(() => {
-      const indicator = document.querySelector('.current-time-indicator') as HTMLElement;
-      if (indicator) {
-        indicator.style.top = `${this.currentTimePosition}px`;
-      }
-    });
+  nextPeriod(): void {
+    switch (this.currentView) {
+      case 'month':
+        this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+        break;
+      case 'week':
+        this.currentDate.setDate(this.currentDate.getDate() + 7);
+        break;
+      case 'day':
+        this.currentDate.setDate(this.currentDate.getDate() + 1);
+        break;
+    }
+    this.currentDate = new Date(this.currentDate);
   }
 
-  goToToday() {
-    this.currentDate = new Date();
+  hasAppointment(day: string, hour: string): boolean {
+    // Mock function - replace with actual appointment checking logic
+    return Math.random() > 0.8; // 20% chance of having an appointment
   }
 
-  navigate(direction: 'prev' | 'next') {
-    const currentDate = new Date(this.currentDate);
-    const daysToAdd = direction === 'next' ? 7 : -7;
-    currentDate.setDate(currentDate.getDate() + daysToAdd);
-    this.currentDate = currentDate;
-  }
-
-  setView(view: string) {
-    this.calendarView = view;
+  getFormattedDate(): string {
+    return this.gridService.getFormattedDate(this.currentDate);
   }
 }

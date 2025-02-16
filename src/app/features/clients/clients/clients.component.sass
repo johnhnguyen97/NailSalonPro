@@ -1,0 +1,159 @@
+@import '../../../styles/mixins'
+@import '../../../styles/grid-mixins'
+
+.clients-container
+  @include card-container
+
+  mat-card
+    @include base-card
+    @include grid-container
+
+    .card-header
+      @include card-header
+      flex-shrink: 0
+
+      .header-title
+        display: flex
+        align-items: center
+        justify-content: space-between
+        margin-bottom: var(--spacing-xl)
+
+        .total-clients
+          color: var(--text-secondary)
+          font-size: var(--font-size-sm)
+          background: var(--background-lighter)
+          padding: var(--spacing-sm) var(--spacing-lg)
+          border-radius: 20px
+          font-weight: var(--font-weight-medium)
+
+      .controls-container
+        display: flex
+        flex-wrap: wrap
+        gap: var(--spacing-xl)
+
+        .search-box
+          flex: 1
+          min-width: 300px
+          
+          mat-form-field
+            width: 100%
+
+            ::ng-deep
+              .mat-mdc-form-field-subscript-wrapper
+                display: none
+
+        .filter-controls
+          display: flex
+          gap: var(--spacing-xl)
+          flex-wrap: wrap
+
+          mat-form-field
+            width: 180px
+
+            ::ng-deep
+              .mat-mdc-form-field-subscript-wrapper
+                display: none
+
+    .table-container
+      @include grid-body
+      padding: 0 var(--spacing-xl) var(--spacing-xl)
+
+      table
+        @include table-grid
+
+        td.mat-column-actions
+          width: 48px
+          text-align: center
+          padding: var(--spacing-sm)
+
+        .status-badge
+          @include status-badge
+
+      mat-paginator
+        position: sticky
+        bottom: 0
+        background: white
+        border-top: 1px solid var(--border-color)
+        margin: 0 calc(var(--spacing-xl) * -1)
+        padding: var(--spacing-xs) var(--spacing-xl)
+
+@media screen and (max-width: 768px)
+  .clients-container
+    mat-card
+      .card-header
+        padding: var(--spacing-lg)
+
+        .controls-container
+          flex-direction: column
+          gap: var(--spacing-lg)
+
+          .search-box
+            min-width: 100%
+
+          .filter-controls
+            width: 100%
+            justify-content: space-between
+            gap: var(--spacing-lg)
+
+            mat-form-field
+              width: calc(33.33% - var(--spacing-md))
+
+      .table-container
+        padding: var(--spacing-xl) var(--spacing-lg)
+
+@media screen and (max-width: 600px)
+  .clients-container
+    mat-card
+      .card-header
+        padding: var(--spacing-md)
+
+        .header-title
+          flex-direction: column
+          align-items: flex-start
+          gap: var(--spacing-md)
+          margin-bottom: var(--spacing-xl)
+
+          .total-clients
+            margin-left: 0
+
+        .controls-container
+          gap: var(--spacing-md)
+
+          .filter-controls
+            flex-direction: column
+            gap: var(--spacing-md)
+
+            mat-form-field
+              width: 100%
+
+      .table-container
+        margin: 0
+        padding: var(--spacing-lg)
+
+        .table-scroll-container
+          overflow-x: auto
+          margin: 0 calc(var(--spacing-lg) * -1)
+          padding: 0 var(--spacing-lg)
+          @include hide-scrollbar
+
+        table
+          min-width: 1000px
+          margin-bottom: 0
+
+          td, th
+            padding: var(--spacing-lg) var(--spacing-md)
+            font-size: var(--font-size-sm)
+
+            &.mat-column-actions
+              position: sticky
+              right: 0
+              background: white
+              box-shadow: -4px 0 4px rgba(0, 0, 0, 0.05)
+
+        mat-paginator
+          margin: 0
+          padding: var(--spacing-xs) var(--spacing-md)
+          ::ng-deep
+            .mat-mdc-paginator-container
+              justify-content: flex-start
+              padding: 0 var(--spacing-sm)
