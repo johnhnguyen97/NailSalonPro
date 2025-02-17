@@ -1,62 +1,129 @@
-// Utility mixins
-@mixin hide-scrollbar
-  scrollbar-width: none
-  -ms-overflow-style: none
-  &::-webkit-scrollbar
-    display: none
+// Layout mixins
+@mixin flex-center
+  display: flex
+  align-items: center
+  justify-content: center
 
+@mixin flex-between
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+// Container mixins
 @mixin card-container
-  padding: var(--spacing-lg)
-  height: calc(100vh - 88px)
-  max-width: 1600px
-  margin: 0 auto
-  overflow: hidden
-
-  @media screen and (max-width: 768px)
-    padding: var(--spacing-md)
-    height: calc(100vh - 80px)
-
-  @media screen and (max-width: 600px)
-    padding: var(--spacing-sm)
-    height: calc(100vh - 72px)
-
-@mixin base-card
-  height: 100%
+  padding: var(--spacing-md)
   display: flex
   flex-direction: column
+  flex: 1
+  min-height: 0
+
+@mixin base-card
+  display: flex
+  flex-direction: column
+  height: 100%
   background: white
   border-radius: var(--border-radius)
-  overflow: hidden
   box-shadow: var(--card-shadow)
 
 @mixin card-header
-  padding: var(--spacing-xl) var(--spacing-xl)
+  padding: var(--spacing-md)
+  border-bottom: 1px solid var(--border-color)
   background: white
-  position: sticky
-  top: 0
-  z-index: 10
+  @include flex-between
 
-  h2
-    margin: 0
-    font-size: var(--font-size-xl)
-    font-weight: var(--font-weight-medium)
-    color: var(--text-primary)
-    letter-spacing: -0.3px
-
-    @media screen and (max-width: 600px)
-      font-size: var(--font-size-lg)
-
-@mixin table-container
+@mixin card-content
+  padding: var(--spacing-md)
   flex: 1
   overflow: auto
   @include hide-scrollbar
 
-@mixin section-content
-  padding: var(--spacing-xl)
-  padding-top: var(--spacing-md)
+@mixin card-footer
+  padding: var(--spacing-md)
+  border-top: 1px solid var(--border-color)
+  background: white
+  @include flex-between
 
-  @media screen and (max-width: 768px)
-    padding: var(--spacing-lg)
+@mixin grid-container
+  display: flex
+  flex-direction: column
+  height: 100%
+  overflow: hidden
 
+// Scrollbar mixins
+@mixin hide-scrollbar
+  scrollbar-width: thin
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent
+
+  &::-webkit-scrollbar
+    width: 6px
+    height: 6px
+
+  &::-webkit-scrollbar-track
+    background: transparent
+
+  &::-webkit-scrollbar-thumb
+    background-color: rgba(0, 0, 0, 0.2)
+    border-radius: 3px
+
+    &:hover
+      background-color: rgba(0, 0, 0, 0.3)
+
+// Text mixins
+@mixin text-truncate
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+@mixin text-body
+  font-size: var(--font-size-base)
+  line-height: 1.5
+  color: var(--text-primary)
+
+@mixin text-secondary
+  font-size: var(--font-size-sm)
+  color: var(--text-secondary)
+
+// Table mixins
+@mixin table-container
+  width: 100%
+  overflow-x: auto
+  @include hide-scrollbar
+
+@mixin table-header
+  background: var(--background-light)
+  border-bottom: 1px solid var(--border-color)
+  font-weight: var(--font-weight-medium)
+  color: var(--text-secondary)
+  text-transform: uppercase
+  font-size: var(--font-size-xs)
+
+@mixin table-cell
+  padding: var(--spacing-sm) var(--spacing-md)
+  border-bottom: 1px solid var(--border-color)
+  font-size: var(--font-size-sm)
+
+// Button mixins
+@mixin button-base
+  height: 32px
+  padding: 0 var(--spacing-md)
+  font-size: var(--font-size-xs)
+  border-radius: var(--border-radius)
+  cursor: pointer
+  transition: all 0.2s ease
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  gap: var(--spacing-xs)
+
+// Responsive mixins
+@mixin mobile
   @media screen and (max-width: 600px)
-    padding: var(--spacing-md)
+    @content
+
+@mixin tablet
+  @media screen and (max-width: 768px)
+    @content
+
+@mixin desktop
+  @media screen and (min-width: 1024px)
+    @content

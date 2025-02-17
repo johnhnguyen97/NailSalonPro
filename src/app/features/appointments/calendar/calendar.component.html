@@ -3,51 +3,100 @@
     <mat-card>
       <div class="calendar-header">
         <div class="calendar-controls">
-          <div class="view-controls">
-            <mat-button-toggle-group [(ngModel)]="currentView" name="viewMode">
-              <mat-button-toggle value="month">Month</mat-button-toggle>
-              <mat-button-toggle value="week">Week</mat-button-toggle>
-              <mat-button-toggle value="day">Day</mat-button-toggle>
-            </mat-button-toggle-group>
-          </div>
-
-          <div class="nav-section">
+          <div class="date-nav">
             <button mat-icon-button (click)="previousPeriod()">
               <mat-icon>chevron_left</mat-icon>
             </button>
-            <span class="current-date">{{ getFormattedDate() }}</span>
+            <div class="current-period">
+              <span class="month">{{ getFormattedMonth() }}</span>
+              <span class="year">{{ getFormattedYear() }}</span>
+            </div>
             <button mat-icon-button (click)="nextPeriod()">
               <mat-icon>chevron_right</mat-icon>
             </button>
           </div>
 
+          <div class="view-controls">
+            <mat-button-toggle-group [(ngModel)]="currentView" name="viewMode">
+              <mat-button-toggle value="month">
+                <mat-icon>calendar_view_month</mat-icon>
+                <span class="view-text">Month</span>
+              </mat-button-toggle>
+              <mat-button-toggle value="week">
+                <mat-icon>calendar_view_week</mat-icon>
+                <span class="view-text">Week</span>
+              </mat-button-toggle>
+              <mat-button-toggle value="day">
+                <mat-icon>calendar_view_day</mat-icon>
+                <span class="view-text">Day</span>
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+
           <button mat-flat-button color="primary" class="new-appointment-btn">
             <mat-icon>add</mat-icon>
-            <span>New</span>
+            <span class="btn-text">New Appointment</span>
           </button>
         </div>
       </div>
 
       <div class="calendar-content">
-        <div class="calendar-grid">
-          <div class="calendar-header">
-            <div class="header-cell time-header"></div>
-            <div class="header-cell" *ngFor="let day of weekDays">{{ day }}</div>
-          </div>
+        <div class="calendar-scroll-container">
+          <!-- Week View -->
+          <table class="calendar-grid" *ngIf="currentView === 'week'">
+            <thead>
+              <tr>
+                <th class="time-header">
+                  <mat-icon>schedule</mat-icon>
+                </th>
+                <th *ngFor="let day of weekDays; let i = index">
+                  <span class="day-name">{{ day }}</span>
+                  <span class="day-date">{{ getDayDate(i) }}</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let hour of hours; let hourIndex = index">
+                <td class="time-cell">{{ hour.displayTime }}</td>
+                <td *ngFor="let day of weekDays; let dayIndex = index" 
+                    class="calendar-cell"
+                    (click)="onTimeSlotClick(dayIndex, hourIndex)">
+                  <ng-container *ngIf="hasAppointment(dayIndex, hourIndex)">
+                    <div class="appointment event-meeting">
+                      <div class="event-title">{{ getAppointmentTitle(dayIndex, hourIndex) }}</div>
+                      <div class="event-time">{{ hour.displayTime }}</div>
+                    </div>
+                  </ng-container>
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
-          <div class="calendar-body">
-            <div class="time-slots">
-              <div class="time-slot" *ngFor="let hour of timeSlots">{{ hour }}</div>
-            </div>
-            
-            <div class="week-grid">
-              <div class="day-column" *ngFor="let day of weekDays">
-                <div class="time-slot" *ngFor="let hour of timeSlots">
-                  <!-- Empty cell for appointments -->
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- Month View -->
+          <table class="calendar-grid" *ngIf="currentView === 'month'">
+            <thead>
+              <tr>
+                <th *ngFor="let day of weekDays">{{ day }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let week of weeks">
+                <td *ngFor="let day of week" 
+                    [class.outside-month]="!day.isCurrentMonth"
+                    [class.today]="day.isToday"
+                    class="month-cell">
+                  <div class="day-content">
+                    <span class="day-number">{{ day.date?.getDate() }}</span>
+                    <div class="day-events">
+                      <div class="event" *ngFor="let event of day.events">
+                        {{ event.title }}
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </mat-card>
