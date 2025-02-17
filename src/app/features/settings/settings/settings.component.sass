@@ -1,273 +1,189 @@
-@import '../../../styles/mixins'
+@use '../../../styles/mixins' as mixins
+@use '../../../styles/settings-mixins' as settings
 
 .settings-container
-  @include card-container
+  @include mixins.card-container
 
-  mat-card
-    @include base-card
+.settings-card
+  @include mixins.base-card
 
-    .settings-header
-      @include card-header
+.settings-header
+  @include mixins.card-header
 
-    mat-accordion
-      @include table-container
-      padding: var(--spacing-lg)
+.settings-accordion
+  @include mixins.table-container
+  padding: var(--spacing-lg)
 
-      .section-icon
-        margin-right: var(--spacing-md)
-        color: var(--text-secondary)
-        font-size: var(--font-size-md)
-        width: var(--font-size-md)
-        height: var(--font-size-md)
-        vertical-align: middle
+.section-icon
+  @include settings.settings-icon
 
-      ::ng-deep .mat-expansion-panel
-        margin-bottom: var(--spacing-lg)
-        border-radius: var(--border-radius) !important
-        box-shadow: var(--card-shadow) !important
-        overflow: hidden
-        font-family: var(--font-family)
+::ng-deep .mat-expansion-panel
+  @include settings.settings-panel
 
-        &:last-child
-          margin-bottom: 0
+.mat-expansion-panel-header
+  @include settings.settings-panel-header
 
-        .mat-expansion-panel-header
-          height: 56px
-          padding: 0 var(--spacing-xl)
+.mat-expansion-panel-header-title
+  @include settings.settings-panel-title
 
-          &:hover:not([aria-disabled=true])
-            background: var(--hover-color)
+.settings-section
+  @include mixins.section-content
 
-          .mat-expansion-panel-header-title
-            color: var(--text-primary)
-            font-weight: var(--font-weight-medium)
-            font-size: var(--font-size-md)
-            margin-right: 0
-            align-items: center
+h3
+  @include settings.settings-section-title
 
-      .settings-section
-        @include section-content
+.full-width
+  width: 100%
+  @include settings.settings-form-field
+  mat-label
+    font-size: var(--font-size-sm)
+    color: var(--text-secondary)
 
-        h3
-          margin: 0 0 var(--spacing-xl)
-          font-size: var(--font-size-md)
-          font-weight: var(--font-weight-medium)
-          color: var(--text-primary)
+.section-divider
+  margin: var(--spacing-xxl) 0 var(--spacing-xl)
 
-        .full-width
-          width: 100%
-          margin-bottom: var(--spacing-xl)
+.business-hours
+  margin-top: var(--spacing-xl)
 
-          &:last-child
-            margin-bottom: 0
+.day-hours
+  display: flex
+  align-items: center
+  gap: var(--spacing-xl)
+  @include settings.settings-list-item
 
-          mat-label
-            font-size: var(--font-size-sm)
-            color: var(--text-secondary)
+.day-hours mat-checkbox
+  min-width: 120px
+  font-size: var(--font-size-sm)
 
-        .section-divider
-          margin-top: var(--spacing-xxl)
-          margin-bottom: var(--spacing-xl)
+.hours-inputs
+  display: flex
+  align-items: center
+  gap: var(--spacing-lg)
+  flex: 1
 
-        // Business Hours Styles
-        .business-hours
-          margin-top: var(--spacing-xl)
+.hours-inputs mat-form-field
+  flex: 1
+  margin-bottom: 0
 
-          .day-hours
-            display: flex
-            align-items: center
-            gap: var(--spacing-xl)
-            margin-bottom: var(--spacing-lg)
-            padding: var(--spacing-lg)
-            border-radius: var(--border-radius)
-            background: var(--background-lighter)
-            
-            &:last-child
-              margin-bottom: 0
+.hours-inputs .separator
+  color: var(--text-secondary)
+  font-size: var(--font-size-sm)
+  margin: 0 var(--spacing-xs)
 
-            mat-checkbox
-              min-width: 120px
-              font-size: var(--font-size-sm)
+.contact-info
+  margin-top: var(--spacing-xl)
 
-            .hours-inputs
-              display: flex
-              align-items: center
-              gap: var(--spacing-lg)
-              flex: 1
+.contact-info mat-form-field
+  @include settings.settings-form-field
 
-              mat-form-field
-                flex: 1
-                margin-bottom: 0
+.contact-info mat-icon
+  color: var(--text-secondary)
 
-                &::ng-deep .mat-mdc-form-field-subscript-wrapper
-                  display: none
+.update-btn
+  margin-top: var(--spacing-sm)
+  width: 100%
+  max-width: 200px
+  height: 36px
+  font-size: var(--font-size-sm)
 
-              .separator
-                color: var(--text-secondary)
-                font-size: var(--font-size-sm)
-                margin: 0 var(--spacing-xs)
+.theme-selector, .color-selector
+  margin-bottom: var(--spacing-xxl)
 
-        // Contact Info Styles
-        .contact-info
-          margin-top: var(--spacing-xl)
+.theme-selector mat-radio-group
+  display: flex
+  gap: var(--spacing-xxl)
 
-          mat-form-field
-            margin-bottom: var(--spacing-xl)
+.theme-selector mat-radio-button
+  font-size: var(--font-size-sm)
 
-            &:last-child
-              margin-bottom: 0
+.color-options
+  display: flex
+  gap: var(--spacing-lg)
+  margin-top: var(--spacing-lg)
 
-            mat-icon
-              color: var(--text-secondary)
+.color-options button
+  width: 36px
+  height: 36px
 
-        // Account Security Styles
-        .update-btn
-          margin-top: var(--spacing-sm)
-          width: 100%
-          max-width: 200px
-          height: 36px
-          font-size: var(--font-size-sm)
+.color-options button.selected
+  border: 2px solid #fff
+  outline: 2px solid currentColor
 
-        // Theme Selector Styles
-        .theme-selector
-          margin-bottom: var(--spacing-xxl)
+.color-options mat-icon
+  font-size: var(--font-size-base)
+  height: var(--font-size-base)
+  width: var(--font-size-base)
 
-          mat-radio-group
-            display: flex
-            gap: var(--spacing-xxl)
+.notifications-list mat-list
+  padding: 0
 
-            mat-radio-button
-              font-size: var(--font-size-sm)
+.notifications-list mat-list-item
+  @include settings.settings-list-item
 
-        // Color Selector Styles
-        .color-selector
-          margin-bottom: var(--spacing-xxl)
+.notifications-list mat-icon
+  margin-right: var(--spacing-lg)
+  color: var(--text-secondary)
+  font-size: var(--font-size-md)
 
-          .color-options
-            display: flex
-            gap: var(--spacing-lg)
-            margin-top: var(--spacing-lg)
+.notifications-list .mat-line
+  white-space: normal
+  font-size: var(--font-size-sm)
 
-            button
-              width: 36px
-              height: 36px
+.notifications-list .subtitle
+  font-size: var(--font-size-xs)
+  color: var(--text-secondary)
+  margin-top: var(--spacing-xs)
 
-              &.selected
-                border: 2px solid #fff
-                outline: 2px solid currentColor
+.notifications-list mat-slide-toggle
+  margin-left: var(--spacing-lg)
 
-              mat-icon
-                font-size: var(--font-size-base)
-                height: var(--font-size-base)
-                width: var(--font-size-base)
+.reminder-settings
+  margin-top: var(--spacing-xxl)
+  display: flex
+  gap: var(--spacing-xl)
 
-        // Notifications List Styles
-        .notifications-list
-          mat-list
-            padding: 0
+.reminder-settings mat-form-field
+  flex: 1
+  max-width: 300px
 
-            mat-list-item
-              height: auto !important
-              margin-bottom: var(--spacing-lg)
-              border-radius: var(--border-radius)
-              background: var(--background-lighter)
-              padding: var(--spacing-lg) !important
-
-              &:last-child
-                margin-bottom: 0
-
-              mat-icon
-                margin-right: var(--spacing-lg)
-                color: var(--text-secondary)
-                font-size: var(--font-size-md)
-
-              .mat-line
-                white-space: normal
-                font-size: var(--font-size-sm)
-
-              .subtitle
-                font-size: var(--font-size-xs)
-                color: var(--text-secondary)
-                margin-top: var(--spacing-xs)
-
-              mat-slide-toggle
-                margin-left: var(--spacing-lg)
-
-          .reminder-settings
-            margin-top: var(--spacing-xxl)
-            display: flex
-            gap: var(--spacing-xl)
-
-            mat-form-field
-              flex: 1
-              max-width: 300px
-
-              ::ng-deep .mat-mdc-form-field-subscript-wrapper
-                display: none
+::ng-deep .mat-mdc-form-field-subscript-wrapper
+  display: none
 
 @media screen and (max-width: 768px)
-  .settings-container
-    mat-card
-      .settings-section
-        padding: var(--spacing-xl) var(--spacing-lg)
-
-        .reminder-settings
-          flex-direction: column
-          gap: var(--spacing-lg)
-
-          mat-form-field
-            max-width: none
-
-        .theme-selector, .density-selector
-          mat-radio-group
-            flex-direction: column
-            gap: var(--spacing-lg)
+  .settings-section
+    padding: var(--spacing-xl) var(--spacing-lg)
+  .reminder-settings, .theme-selector mat-radio-group
+    flex-direction: column
+    gap: var(--spacing-lg)
+  .reminder-settings mat-form-field
+    max-width: none
 
 @media screen and (max-width: 600px)
-  .settings-container
-    mat-card
-      .settings-header
-        padding: var(--spacing-lg)
-
-        h2
-          font-size: var(--font-size-lg)
-
-      mat-accordion
-        padding: var(--spacing-md)
-
-        .settings-section
-          padding: var(--spacing-lg) var(--spacing-md)
-
-          .business-hours
-            .day-hours
-              flex-direction: column
-              align-items: stretch
-              padding: var(--spacing-lg)
-              
-              mat-checkbox
-                margin-bottom: var(--spacing-lg)
-
-              .hours-inputs
-                flex-direction: column
-                gap: var(--spacing-md)
-                
-                .separator
-                  align-self: center
-                  margin: var(--spacing-xs) 0
-
-          .notifications-list
-            mat-list-item
-              flex-direction: column
-              align-items: flex-start
-              gap: var(--spacing-lg)
-
-              mat-slide-toggle
-                align-self: flex-end
-                margin: var(--spacing-sm) 0 0
-
-          .contact-info
-            mat-form-field
-              margin-bottom: var(--spacing-lg)
-
-          .full-width
-            margin-bottom: var(--spacing-lg)
+  .settings-header
+    padding: var(--spacing-lg)
+    h2
+      font-size: var(--font-size-lg)
+  .settings-accordion
+    padding: var(--spacing-md)
+  .settings-section
+    padding: var(--spacing-lg) var(--spacing-md)
+  .day-hours
+    flex-direction: column
+    align-items: stretch
+  .day-hours mat-checkbox
+    margin-bottom: var(--spacing-lg)
+  .hours-inputs
+    flex-direction: column
+    gap: var(--spacing-md)
+  .hours-inputs .separator
+    align-self: center
+    margin: var(--spacing-xs) 0
+  .notifications-list mat-list-item
+    flex-direction: column
+    align-items: flex-start
+    gap: var(--spacing-lg)
+  .notifications-list mat-slide-toggle
+    align-self: flex-end
+    margin: var(--spacing-sm) 0 0
+  .contact-info mat-form-field, .full-width
+    margin-bottom: var(--spacing-lg)

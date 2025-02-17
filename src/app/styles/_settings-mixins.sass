@@ -1,0 +1,49 @@
+@mixin settings-form-field
+  margin-bottom: var(--spacing-xl)
+  &:last-child
+    margin-bottom: 0
+
+@mixin settings-section-title
+  margin: 0 0 var(--spacing-xl)
+  font-size: var(--font-size-md)
+  font-weight: var(--font-weight-medium)
+  color: var(--text-primary)
+
+@mixin settings-list-item
+  height: auto !important
+  margin-bottom: var(--spacing-lg)
+  border-radius: var(--border-radius)
+  background: var(--background-lighter)
+  padding: var(--spacing-lg) !important
+  &:last-child
+    margin-bottom: 0
+
+@mixin settings-icon
+  margin-right: var(--spacing-md)
+  color: var(--text-secondary)
+  font-size: var(--font-size-md)
+  width: var(--font-size-md)
+  height: var(--font-size-md)
+  vertical-align: middle
+
+@mixin settings-panel
+  margin-bottom: var(--spacing-lg)
+  border-radius: var(--border-radius) !important
+  box-shadow: var(--card-shadow) !important
+  overflow: hidden
+  font-family: var(--font-family)
+  &:last-child
+    margin-bottom: 0
+
+@mixin settings-panel-header
+  height: 56px
+  padding: 0 var(--spacing-xl)
+  &:hover:not([aria-disabled=true])
+    background: var(--hover-color)
+
+@mixin settings-panel-title
+  color: var(--text-primary)
+  font-weight: var(--font-weight-medium)
+  font-size: var(--font-size-md)
+  margin-right: 0
+  align-items: center

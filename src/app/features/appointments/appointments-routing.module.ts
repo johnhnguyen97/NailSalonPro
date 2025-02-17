@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AppointmentsComponent } from './appointments/appointments.component';
+import { Route, RouterModule } from '@angular/router';
 
-// This defines the route for the appointments feature
-const routes: Routes = [
+const routes: Route[] = [
   {
-    path: '',  // Empty path because it's already under /appointments in app routes
-    component: AppointmentsComponent
+    path: '',
+    loadComponent: () => import('./appointments/appointments.component')
+      .then(m => m.AppointmentsComponent),
+    title: 'Appointments'
   }
 ];
 
