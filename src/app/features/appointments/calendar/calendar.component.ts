@@ -1,27 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CalendarService, CalendarDay, Hour } from '../services/calendar.service';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { FormsModule } from '@angular/forms';
+import { CalendarService, CalendarDay, Hour } from '../services/calendar.service';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.sass'],
   standalone: true,
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-    MatButtonToggleModule,
-    FormsModule
-  ]
+  imports: [CommonModule, MatIconModule],
+  host: {
+    class: 'calendar-wrapper'
+  }
 })
 export class CalendarComponent implements OnInit {
   weeks: CalendarDay[][] = [];
@@ -29,7 +19,6 @@ export class CalendarComponent implements OnInit {
   daysOfWeek: string[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   currentYear: number;
   currentMonth: number;
-  viewMode: 'week' | 'day' = 'week';
 
   constructor(private calendarService: CalendarService) {
     const today = new Date();
@@ -39,11 +28,11 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.generateCalendar();
+    this.hours = this.calendarService.generateHours();
   }
 
   generateCalendar(): void {
     this.weeks = this.calendarService.generateCalendar(this.currentYear, this.currentMonth);
-    this.hours = this.calendarService.generateHours();
   }
 
   prevMonth(): void {
@@ -64,14 +53,7 @@ export class CalendarComponent implements OnInit {
     this.generateCalendar();
   }
 
-  today(): void {
-    const today = new Date();
-    this.currentYear = today.getFullYear();
-    this.currentMonth = today.getMonth();
-    this.generateCalendar();
-  }
-
-  onViewModeChange(mode: 'week' | 'day'): void {
-    this.viewMode = mode;
+  formatHour(hour: number): string {
+    return hour.toString().padStart(2, '0') + ':00';
   }
 }
