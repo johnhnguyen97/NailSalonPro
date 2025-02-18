@@ -1,189 +1,293 @@
-@use '../../../styles/mixins'
-@use '../../../styles/settings-mixins' as settings
+@use '../../../styles/mixins' as mixins
 
 .settings-container
-  @include mixins.card-container
-
-.settings-card
-  @include mixins.base-card
-
-.settings-header
-  @include mixins.card-header
-
-.settings-accordion
-  @include mixins.table-container
-  padding: var(--spacing-lg)
-
-.section-icon
-  @include settings.settings-icon
-
-::ng-deep .mat-expansion-panel
-  @include settings.settings-panel
-
-.mat-expansion-panel-header
-  @include settings.settings-panel-header
-
-.mat-expansion-panel-header-title
-  @include settings.settings-panel-title
-
-.settings-section
-  @include mixins.section-content
-
-h3
-  @include settings.settings-section-title
-
-.full-width
-  width: 100%
-  @include settings.settings-form-field
-  mat-label
-    font-size: var(--font-size-sm)
-    color: var(--text-secondary)
-
-.section-divider
-  margin: var(--spacing-xxl) 0 var(--spacing-xl)
-
-.business-hours
-  margin-top: var(--spacing-xl)
-
-.day-hours
+  height: 100%
+  min-height: 0
   display: flex
-  align-items: center
-  gap: var(--spacing-xl)
-  @include settings.settings-list-item
+  flex-direction: column
+  background: var(--background-paper)
+  border-radius: 8px
+  overflow: hidden
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06)
 
-.day-hours mat-checkbox
-  min-width: 120px
-  font-size: var(--font-size-sm)
+  mat-card-header
+    padding: 16px 24px
+    background: var(--background-paper)
+    border-bottom: 1px solid var(--border-color)
 
-.hours-inputs
-  display: flex
-  align-items: center
-  gap: var(--spacing-lg)
-  flex: 1
+    mat-card-title
+      @include mixins.font-headline-6
+      margin: 0
+      color: var(--text-primary)
 
-.hours-inputs mat-form-field
-  flex: 1
-  margin-bottom: 0
+  mat-card-content
+    flex: 1
+    min-height: 0
+    padding: 16px
+    overflow: hidden
+    background: var(--background-paper)
 
-.hours-inputs .separator
-  color: var(--text-secondary)
-  font-size: var(--font-size-sm)
-  margin: 0 var(--spacing-xs)
+    .settings-layout
+      display: flex
+      gap: 16px
+      height: 100%
+      min-height: 0
 
-.contact-info
-  margin-top: var(--spacing-xl)
+      // Left side navigation
+      .settings-nav
+        flex: 0 0 260px
+        min-height: 0
+        padding: 0
+        background: var(--background-paper)
+        border-radius: 8px
+        overflow: hidden
+        display: flex
+        flex-direction: column
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06)
+        position: sticky
+        top: 16px
 
-.contact-info mat-form-field
-  @include settings.settings-form-field
+        mat-nav-list
+          padding: 8px
+          overflow-y: auto
+          @include mixins.custom-scrollbar
 
-.contact-info mat-icon
-  color: var(--text-secondary)
+          mat-list-item
+            height: 44px
+            border-radius: 6px
+            margin-bottom: 2px
+            cursor: pointer
+            transition: all 0.2s ease
+            @include mixins.font-body-2
 
-.update-btn
-  margin-top: var(--spacing-sm)
-  width: 100%
-  max-width: 200px
-  height: 36px
-  font-size: var(--font-size-sm)
+            &:hover
+              background: var(--hover-color)
 
-.theme-selector, .color-selector
-  margin-bottom: var(--spacing-xxl)
+            &.active
+              background: var(--primary-light)
+              color: var(--primary)
 
-.theme-selector mat-radio-group
-  display: flex
-  gap: var(--spacing-xxl)
+              mat-icon
+                color: var(--primary)
 
-.theme-selector mat-radio-button
-  font-size: var(--font-size-sm)
+            mat-icon
+              margin-right: 12px
+              color: var(--text-secondary)
+              @include mixins.icon-size(22px)
 
-.color-options
-  display: flex
-  gap: var(--spacing-lg)
-  margin-top: var(--spacing-lg)
+        .subsections
+          margin-left: 20px
+          margin-bottom: 4px
+          overflow: hidden
+          transition: max-height 0.3s ease-in-out
+          max-height: 0
 
-.color-options button
-  width: 36px
-  height: 36px
+          &.active
+            max-height: 500px
 
-.color-options button.selected
-  border: 2px solid #fff
-  outline: 2px solid currentColor
+          mat-list-item
+            height: 36px
+            border-radius: 6px
+            margin-bottom: 1px
 
-.color-options mat-icon
-  font-size: var(--font-size-base)
-  height: var(--font-size-base)
-  width: var(--font-size-base)
+            .subsection-content
+              display: flex
+              align-items: center
+              width: 100%
+              padding: 0 8px
 
-.notifications-list mat-list
-  padding: 0
+              mat-icon
+                @include mixins.icon-size(18px)
+                margin-right: 8px
+                color: var(--text-secondary)
 
-.notifications-list mat-list-item
-  @include settings.settings-list-item
+              .subsection-text
+                display: flex
+                flex-direction: column
+                min-width: 0
 
-.notifications-list mat-icon
-  margin-right: var(--spacing-lg)
-  color: var(--text-secondary)
-  font-size: var(--font-size-md)
+                .title
+                  @include mixins.font-body-2
+                  color: var(--text-primary)
 
-.notifications-list .mat-line
-  white-space: normal
-  font-size: var(--font-size-sm)
+      // Right side content
+      .settings-content
+        flex: 1
+        min-width: 0
+        overflow-y: auto
+        @include mixins.custom-scrollbar
+        scroll-behavior: smooth
 
-.notifications-list .subtitle
-  font-size: var(--font-size-xs)
-  color: var(--text-secondary)
-  margin-top: var(--spacing-xs)
+        .section-label
+          @include mixins.font-headline-6
+          color: var(--text-primary)
+          margin: 0 0 12px
+          padding-bottom: 6px
+          border-bottom: 2px solid var(--primary)
 
-.notifications-list mat-slide-toggle
-  margin-left: var(--spacing-lg)
+        .settings-detail-card
+          background: var(--background-paper)
+          border-radius: 8px
+          overflow: hidden
+          margin-bottom: 16px
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06)
 
-.reminder-settings
-  margin-top: var(--spacing-xxl)
-  display: flex
-  gap: var(--spacing-xl)
+          mat-card-header
+            padding: 12px 16px
+            border-bottom: 1px solid var(--border-color)
+            background: var(--background-paper)
+            display: flex
+            align-items: center
+            gap: 8px
 
-.reminder-settings mat-form-field
-  flex: 1
-  max-width: 300px
+            mat-icon
+              @include mixins.icon-size(22px)
+              color: var(--text-secondary)
 
-::ng-deep .mat-mdc-form-field-subscript-wrapper
-  display: none
+            mat-card-title
+              @include mixins.font-subtitle-1
+              margin: 0
+              color: var(--text-primary)
 
-@media screen and (max-width: 768px)
-  .settings-section
-    padding: var(--spacing-xl) var(--spacing-lg)
-  .reminder-settings, .theme-selector mat-radio-group
-    flex-direction: column
-    gap: var(--spacing-lg)
-  .reminder-settings mat-form-field
-    max-width: none
+          mat-card-content
+            padding: 16px
 
-@media screen and (max-width: 600px)
-  .settings-header
-    padding: var(--spacing-lg)
-    h2
-      font-size: var(--font-size-lg)
-  .settings-accordion
-    padding: var(--spacing-md)
-  .settings-section
-    padding: var(--spacing-lg) var(--spacing-md)
-  .day-hours
-    flex-direction: column
-    align-items: stretch
-  .day-hours mat-checkbox
-    margin-bottom: var(--spacing-lg)
-  .hours-inputs
-    flex-direction: column
-    gap: var(--spacing-md)
-  .hours-inputs .separator
-    align-self: center
-    margin: var(--spacing-xs) 0
-  .notifications-list mat-list-item
-    flex-direction: column
-    align-items: flex-start
-    gap: var(--spacing-lg)
-  .notifications-list mat-slide-toggle
-    align-self: flex-end
-    margin: var(--spacing-sm) 0 0
-  .contact-info mat-form-field, .full-width
-    margin-bottom: var(--spacing-lg)
+            h3
+              @include mixins.font-subtitle-2
+              margin: 0 0 12px
+              color: var(--text-secondary)
+
+            .settings-form
+              .form-group
+                display: flex
+                flex-direction: column
+                gap: 12px
+                max-width: 400px
+
+              .toggle-group
+                display: flex
+                flex-direction: column
+                gap: 8px
+
+                mat-slide-toggle
+                  @include mixins.font-body-2
+
+              .integration-list
+                display: flex
+                flex-direction: column
+                gap: 8px
+
+                .integration-item
+                  display: flex
+                  align-items: center
+                  padding: 12px
+                  border-radius: 6px
+                  border: 1px solid var(--border-color)
+                  background: var(--background-paper)
+
+                  mat-icon
+                    @include mixins.icon-size(20px)
+                    margin-right: 8px
+                    color: var(--text-secondary)
+
+                  span
+                    @include mixins.font-body-2
+                    flex: 1
+
+// Mobile styles
+@media (max-width: 768px)
+  .settings-container
+    border-radius: 0
+
+    mat-card-header
+      padding: 12px 16px
+      position: sticky
+      top: 0
+      z-index: 10
+
+      mat-card-title
+        @include mixins.font-headline-6-mobile
+
+    mat-card-content
+      padding: 8px
+      gap: 8px
+
+      .settings-layout
+        flex-direction: column
+        gap: 8px
+
+        .settings-nav
+          flex: 0 0 auto
+          position: sticky
+          top: 48px
+          z-index: 9
+          border-radius: 6px
+
+          mat-nav-list
+            padding: 4px
+            max-height: 180px
+
+            mat-list-item
+              height: 40px
+              @include mixins.font-body-2-mobile
+
+              mat-icon
+                @include mixins.icon-size(20px)
+
+          .subsections
+            margin-left: 16px
+
+            .subsection-content
+              padding: 0 8px
+
+              .subsection-text
+                .title
+                  @include mixins.font-body-2-mobile
+
+        .settings-content
+          .section-label
+            @include mixins.font-headline-6-mobile
+            margin: 0 0 8px
+            padding-bottom: 4px
+
+          .settings-detail-card
+            margin-bottom: 12px
+            border-radius: 6px
+
+            mat-card-header
+              padding: 10px 12px
+
+              mat-card-title
+                @include mixins.font-subtitle-1-mobile
+
+            mat-card-content
+              padding: 12px
+
+              h3
+                @include mixins.font-subtitle-2-mobile
+                margin-bottom: 8px
+
+              .settings-form
+                .form-group,
+                .theme-options,
+                .font-options,
+                .notification-options,
+                .work-hours-options,
+                .availability-options
+                  max-width: 100%
+
+                .toggle-group
+                  gap: 6px
+
+                  mat-slide-toggle
+                    @include mixins.font-body-2-mobile
+
+                .integration-list
+                  .integration-item
+                    padding: 8px
+
+                    mat-icon
+                      @include mixins.icon-size(18px)
+
+                    span
+                      @include mixins.font-body-2-mobile

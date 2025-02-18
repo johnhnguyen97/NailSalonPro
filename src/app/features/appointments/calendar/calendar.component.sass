@@ -1,17 +1,44 @@
-.calendar-container
+@use '../../../styles/mixins' as mixins
+
+.outer-card
+  height: 100%
   display: flex
   flex-direction: column
-  height: 100%
-  background: white
-  border: 1px solid var(--border-color)
-  border-radius: var(--border-radius)
+  padding: 0
   overflow: hidden
+
+  mat-card-header
+    padding: 16px
+    border-bottom: 1px solid var(--border-color)
+    background: var(--background-paper)
+    flex-shrink: 0
+
+    mat-card-title
+      display: flex
+      align-items: center
+      gap: 8px
+      margin: 0
+      
+      mat-icon
+        color: var(--text-secondary)
+
+  mat-card-content
+    flex: 1
+    min-height: 0
+    padding: 0
+    overflow: hidden
+
+.calendar-container
+  height: 100%
+  display: flex
+  flex-direction: column
+  min-height: 0
 
 .calendar-header
   display: flex
   align-items: center
   justify-content: space-between
-  padding: var(--spacing-lg)
+  padding: var(--spacing-md)
   background: var(--background-light)
   border-bottom: 1px solid var(--border-color)
   flex-shrink: 0
@@ -34,11 +61,24 @@
       color: var(--text-primary)
       background: var(--hover-color)
 
+.inner-card
+  flex: 1
+  margin: var(--spacing-sm)
+  padding: 0
+  display: flex
+  border-radius: var(--border-radius)
+  background: var(--background-paper)
+  overflow: hidden
+  border: 1px solid var(--border-color)
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06)
+  min-height: 0
+
 .calendar-grid
   flex: 1
   display: flex
   flex-direction: column
   overflow: hidden
+  min-height: 0
 
 .days-header
   display: grid
@@ -57,7 +97,7 @@
     justify-content: center
     padding: var(--spacing-xs)
     background: var(--background-light)
-    height: 50px
+    height: 40px
     box-sizing: border-box
 
     mat-icon
@@ -67,7 +107,7 @@
       font-size: 20px
 
   .day-header
-    height: 50px
+    height: 40px
     padding: var(--spacing-xs)
     text-align: center
     font-size: var(--font-size-sm)
@@ -80,6 +120,7 @@
     align-items: center
     justify-content: center
     box-sizing: border-box
+    background: var(--background-light)
 
     &:last-child
       border-right: none
@@ -91,6 +132,7 @@
   grid-template-columns: 60px 1fr
   position: relative
   min-height: 0
+  @include mixins.custom-scrollbar
 
   .time-column
     position: sticky
@@ -100,7 +142,7 @@
     background: var(--background-light)
 
     .time-cell
-      height: 50px
+      height: 40px
       padding: var(--spacing-xs)
       font-size: var(--font-size-xs)
       color: var(--text-secondary)
@@ -124,9 +166,41 @@
         border-right: none
 
       .time-slot
-        height: 50px
+        height: 40px
         border-bottom: 1px solid var(--border-color)
         box-sizing: border-box
 
         &:hover
           background: var(--hover-color)
+
+// Mobile styles
+@media (max-width: 768px)
+  .outer-card
+    border-radius: 0
+    box-shadow: none
+
+    mat-card-header
+      padding: 12px
+
+  .calendar-header
+    padding: var(--spacing-sm)
+
+    .month-heading
+      font-size: var(--font-size-md)
+
+    .nav-button
+      padding: var(--spacing-xs) var(--spacing-md)
+
+  .inner-card
+    margin: var(--spacing-xs)
+    border-radius: var(--border-radius-sm)
+
+  .days-header
+    .day-header
+      font-size: var(--font-size-xs)
+      padding: var(--spacing-xxs)
+
+  .grid-content
+    .time-cell
+      padding: var(--spacing-xxs)
+      font-size: var(--font-size-xxs)

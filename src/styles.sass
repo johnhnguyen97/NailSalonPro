@@ -1,79 +1,93 @@
-// Global styles
-:root
-  // Colors
-  --text-primary: rgba(0, 0, 0, 0.87)
-  --text-secondary: rgba(0, 0, 0, 0.54)
-  --border-color: rgba(0, 0, 0, 0.12)
-  --hover-color: rgba(0, 0, 0, 0.04)
-  --background-light: #fafafa
-  --background-lighter: #ffffff
+/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat
+@use 'app/styles/mixins' as mixins
 
-  // Typography
-  --font-family: 'Roboto', sans-serif
-  --font-size-xs: 12px
-  --font-size-sm: 14px
-  --font-size-base: 16px
-  --font-size-lg: 18px
-  --font-size-xl: 20px
-  --font-weight-normal: 400
-  --font-weight-medium: 500
-  --font-weight-bold: 700
+// Common Material Overrides
+.mat-mdc-card
+  background: var(--background-paper)
+  border-radius: 8px
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12)
 
-  // Spacing
-  --spacing-xs: 4px
-  --spacing-sm: 8px
-  --spacing-md: 12px
-  --spacing-lg: 16px
-  --spacing-xl: 24px
-  --spacing-xxl: 32px
+.mat-mdc-form-field
+  width: 100%
 
-  // Border radius
-  --border-radius: 8px
-
-  // Shadows
-  --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
-
-html, body
-  margin: 0
-  padding: 0
-  height: 100%
+.mat-mdc-button-toggle-group
+  border-radius: 8px
+  border: 1px solid var(--border-color)
   overflow: hidden
-  font-family: var(--font-family)
 
-// Full height for router components
-router-outlet + *
-  display: block
-  height: 100%
+  .mat-mdc-button-toggle
+    background: var(--background-paper)
+    border: none
+    border-right: 1px solid var(--border-color)
 
-// Utility classes
-.flex-fill
-  flex: 1
-  min-height: 0
+    &:last-child
+      border-right: none
 
-.overflow-auto
-  overflow: auto
+    &.mat-mdc-button-toggle-checked
+      background: var(--primary-light)
+      color: var(--primary)
 
-// Material overrides
+.mat-mdc-slide-toggle
+  .mdc-switch
+    margin-right: 8px
+
 .mat-mdc-icon-button
-  --mdc-icon-button-state-layer-size: 36px !important
-  padding: 6px !important
-  width: 36px !important
-  height: 36px !important
+  mat-icon
+    @include mixins.icon-size(24px)
 
-  .mat-icon
-    width: 20px !important
-    height: 20px !important
-    font-size: 20px !important
+// Common Utility Classes
+.flex-center
+  @include mixins.flex-center
 
-// Calendar specific styles
-app-calendar
-  display: block
-  height: 100%
+.flex-between
+  @include mixins.flex-between
 
-.calendar-wrapper
-  height: 100%
-  display: block
+.flex-column
+  @include mixins.flex-column
 
-.appointments-wrapper
-  height: 100%
-  display: block
+.text-truncate
+  @include mixins.text-truncate
+
+// Common Form Styles
+.form-group
+  @include mixins.flex-column
+  gap: 16px
+  max-width: 400px
+
+// Theme Variables
+:root
+  // Light Theme
+  --background-paper: #ffffff
+  --background-light: #f5f5f5
+  --text-primary: rgba(0, 0, 0, 0.87)
+  --text-secondary: rgba(0, 0, 0, 0.6)
+  --border-color: rgba(0, 0, 0, 0.12)
+  --border-color-light: rgba(0, 0, 0, 0.08)
+  --border-color-dark: rgba(0, 0, 0, 0.2)
+  --hover-color: rgba(0, 0, 0, 0.04)
+  --active-color: rgba(0, 0, 0, 0.08)
+  --primary: #1976d2
+  --primary-light: rgba(25, 118, 210, 0.08)
+  --primary-rgb: 25, 118, 210
+  --success: #2e7d32
+  --success-rgb: 46, 125, 50
+  --error: #d32f2f
+  --error-rgb: 211, 47, 47
+  --info: #0288d1
+  --info-rgb: 2, 136, 209
+
+// Scrollbar Styles
+::-webkit-scrollbar
+  width: 6px
+  height: 6px
+
+::-webkit-scrollbar-track
+  background: var(--background-light)
+
+::-webkit-scrollbar-thumb
+  background: var(--border-color)
+  border-radius: 3px
+
+  &:hover
+    background: var(--border-color-dark)

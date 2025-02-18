@@ -1,20 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageContainerComponent } from '../../../shared/layout/page-container/page-container.component';
-
-// Material Imports
 import { MatCardModule } from '@angular/material/card';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatRadioModule } from '@angular/material/radio';
+import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDividerModule } from '@angular/material/divider';
+import { FormsModule } from '@angular/forms';
+
+interface SettingsSection {
+  id: string;
+  title: string;
+  icon: string;
+  subsections: {
+    id: string;
+    title: string;
+    icon: string;
+  }[];
+}
 
 @Component({
   selector: 'app-settings',
@@ -23,105 +32,250 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
     PageContainerComponent,
     MatCardModule,
-    MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule,
-    MatIconModule,
     MatButtonModule,
-    MatRadioModule,
+    MatIconModule,
     MatListModule,
     MatSlideToggleModule,
-    MatCheckboxModule
+    MatButtonToggleModule,
+    MatExpansionModule,
+    MatSelectModule,
+    MatDividerModule,
+    FormsModule
   ]
 })
-export class SettingsComponent {
-  workDays = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday'
+export class SettingsComponent implements AfterViewInit {
+  @ViewChild('settingsContent') settingsContent?: ElementRef;
+  
+  selectedSection = '';
+  expandedSection = '';
+  isMobileView = window.innerWidth < 768;
+  
+  sections: SettingsSection[] = [
+    {
+      id: 'profile',
+      title: 'Profile Settings',
+      icon: 'account_circle',
+      subsections: [
+        { 
+          id: 'personal',
+          title: 'Personal Information',
+          icon: 'person'
+        },
+        { 
+          id: 'security',
+          title: 'Security',
+          icon: 'lock'
+        },
+        {
+          id: 'preferences',
+          title: 'Preferences',
+          icon: 'settings'
+        }
+      ]
+    },
+    {
+      id: 'appearance',
+      title: 'Appearance',
+      icon: 'palette',
+      subsections: [
+        {
+          id: 'theme',
+          title: 'Theme',
+          icon: 'dark_mode'
+        },
+        {
+          id: 'font',
+          title: 'Font Settings',
+          icon: 'format_size'
+        },
+        {
+          id: 'layout',
+          title: 'Layout Options',
+          icon: 'view_quilt'
+        }
+      ]
+    },
+    {
+      id: 'notifications',
+      title: 'Notifications',
+      icon: 'notifications',
+      subsections: [
+        {
+          id: 'email',
+          title: 'Email Notifications',
+          icon: 'email'
+        },
+        {
+          id: 'sms',
+          title: 'SMS Notifications',
+          icon: 'sms'
+        },
+        {
+          id: 'push',
+          title: 'Push Notifications',
+          icon: 'notifications_active'
+        }
+      ]
+    },
+    {
+      id: 'calendar',
+      title: 'Calendar Settings',
+      icon: 'calendar_today',
+      subsections: [
+        {
+          id: 'workHours',
+          title: 'Work Hours',
+          icon: 'schedule'
+        },
+        {
+          id: 'availability',
+          title: 'Availability',
+          icon: 'event_available'
+        },
+        {
+          id: 'scheduling',
+          title: 'Scheduling Rules',
+          icon: 'rule'
+        }
+      ]
+    },
+    {
+      id: 'integrations',
+      title: 'Integrations',
+      icon: 'integration_instructions',
+      subsections: [
+        {
+          id: 'calendar-sync',
+          title: 'Calendar Sync',
+          icon: 'sync'
+        },
+        {
+          id: 'payment',
+          title: 'Payment Services',
+          icon: 'payments'
+        },
+        {
+          id: 'messaging',
+          title: 'Messaging Services',
+          icon: 'chat'
+        }
+      ]
+    }
   ];
 
-  defaultBusinessHours = {
-    start: '09:00',
-    end: '17:00'
-  };
+  timeZones = [
+    'America/Chicago',
+    'America/New_York',
+    'America/Los_Angeles',
+    'America/Phoenix',
+    'Europe/London',
+    'Europe/Paris',
+    'Asia/Tokyo',
+    'Australia/Sydney'
+  ];
 
-  businessInfo = {
-    name: '',
-    email: '',
-    phone: '',
-    address: '',
-    timezone: 'america/chicago',
-    websiteTitle: ''
-  };
+  languages = [
+    { code: 'en', name: 'English' },
+    { code: 'es', name: 'Spanish' },
+    { code: 'fr', name: 'French' },
+    { code: 'de', name: 'German' },
+    { code: 'it', name: 'Italian' },
+    { code: 'pt', name: 'Portuguese' },
+    { code: 'ja', name: 'Japanese' },
+    { code: 'ko', name: 'Korean' }
+  ];
 
-  notificationSettings = {
-    email: false,
-    sms: false,
-    browser: false,
-    emailReminderTime: '24',
-    smsReminderTime: '1'
-  };
+  dateFormats = [
+    { value: 'MM/DD/YYYY', label: 'MM/DD/YYYY' },
+    { value: 'DD/MM/YYYY', label: 'DD/MM/YYYY' },
+    { value: 'YYYY-MM-DD', label: 'YYYY-MM-DD' }
+  ];
 
-  appearanceSettings = {
-    theme: 'light',
-    density: 'comfortable',
-    primaryColor: 'primary'
-  };
-
-  businessHours: { [key: string]: { active: boolean, start: string, end: string } } = {};
+  timeFormats = [
+    { value: '12', label: '12-hour' },
+    { value: '24', label: '24-hour' }
+  ];
 
   constructor() {
-    // Initialize business hours
-    this.workDays.forEach(day => {
-      this.businessHours[day] = {
-        active: true,
-        start: this.defaultBusinessHours.start,
-        end: this.defaultBusinessHours.end
-      };
-    });
+    window.addEventListener('resize', this.handleResize.bind(this));
   }
 
-  updateBusinessInfo() {
-    console.log('Saving business info:', this.businessInfo);
-    // TODO: Implement save functionality
-  }
-
-  updateBusinessHours() {
-    console.log('Saving business hours:', this.businessHours);
-    // TODO: Implement save functionality
-  }
-
-  updateNotificationSettings() {
-    console.log('Saving notification settings:', this.notificationSettings);
-    // TODO: Implement save functionality
-  }
-
-  updateAppearance() {
-    console.log('Saving appearance settings:', this.appearanceSettings);
-    // TODO: Implement save functionality
-  }
-
-  updatePassword(currentPassword: string, newPassword: string, confirmPassword: string) {
-    if (newPassword !== confirmPassword) {
-      console.error('Passwords do not match');
-      return;
+  ngAfterViewInit() {
+    // Select first section by default
+    if (!this.selectedSection && this.sections.length > 0) {
+      this.selectSection(this.sections[0].id);
     }
-    console.log('Updating password');
-    // TODO: Implement password update functionality
   }
 
-  toggleTwoFactor(enabled: boolean) {
-    console.log('Two-factor authentication:', enabled ? 'enabled' : 'disabled');
-    // TODO: Implement 2FA toggle functionality
+  selectSection(sectionId: string): void {
+    const section = this.sections.find(s => s.id === sectionId);
+    const subsection = this.sections.find(s => 
+      s.subsections.some(sub => sub.id === sectionId)
+    );
+
+    if (section) {
+      // Clicking on a main section
+      if (this.expandedSection === sectionId) {
+        // If already expanded, collapse it
+        this.expandedSection = '';
+        this.selectedSection = '';
+      } else {
+        // Expand the section and select its first subsection
+        this.expandedSection = sectionId;
+        this.selectedSection = section.subsections[0].id;
+        this.scrollToSection(section.subsections[0].id);
+      }
+    } else if (subsection) {
+      // Clicking on a subsection
+      this.expandedSection = subsection.id;
+      this.selectedSection = sectionId;
+      this.scrollToSection(sectionId);
+    }
+  }
+
+  private scrollToSection(sectionId: string): void {
+    if (sectionId) {
+      const element = document.getElementById(`section-${sectionId}`);
+      if (element) {
+        const headerOffset = this.isMobileView ? 100 : 20;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+
+        if (this.settingsContent) {
+          this.settingsContent.nativeElement.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    }
+  }
+
+  @HostListener('window:resize')
+  private handleResize(): void {
+    this.isMobileView = window.innerWidth < 768;
+  }
+
+  isSelected(sectionId: string): boolean {
+    return this.expandedSection === sectionId;
+  }
+
+  isSubsectionSelected(subsectionId: string): boolean {
+    return this.selectedSection === subsectionId;
+  }
+
+  getParentSection(subsectionId: string): SettingsSection | undefined {
+    return this.sections.find(section => 
+      section.subsections.some(sub => sub.id === subsectionId)
+    );
   }
 }

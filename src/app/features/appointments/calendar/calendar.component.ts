@@ -1,59 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { CalendarService, CalendarDay, Hour } from '../services/calendar.service';
+import { MatCardModule } from '@angular/material/card';
+import { PageContainerComponent } from '../../../shared/layout/page-container/page-container.component';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.sass'],
   standalone: true,
-  imports: [CommonModule, MatIconModule],
-  host: {
-    class: 'calendar-wrapper'
-  }
+  imports: [CommonModule, MatIconModule, MatCardModule, PageContainerComponent]
 })
-export class CalendarComponent implements OnInit {
-  weeks: CalendarDay[][] = [];
-  hours: Hour[] = [];
-  daysOfWeek: string[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  currentYear: number;
-  currentMonth: number;
+export class CalendarComponent {
+  currentMonth = new Date().getMonth();
+  currentYear = new Date().getFullYear();
+  
+  // Update to Monday-Sunday format
+  daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  hours = Array.from({ length: 24 }, (_, i) => ({ hour: i }));
 
-  constructor(private calendarService: CalendarService) {
-    const today = new Date();
-    this.currentYear = today.getFullYear();
-    this.currentMonth = today.getMonth();
-  }
-
-  ngOnInit(): void {
-    this.generateCalendar();
-    this.hours = this.calendarService.generateHours();
-  }
-
-  generateCalendar(): void {
-    this.weeks = this.calendarService.generateCalendar(this.currentYear, this.currentMonth);
-  }
-
-  prevMonth(): void {
-    this.currentMonth--;
-    if (this.currentMonth < 0) {
+  prevMonth() {
+    if (this.currentMonth === 0) {
       this.currentMonth = 11;
       this.currentYear--;
+    } else {
+      this.currentMonth--;
     }
-    this.generateCalendar();
   }
 
-  nextMonth(): void {
-    this.currentMonth++;
-    if (this.currentMonth > 11) {
+  nextMonth() {
+    if (this.currentMonth === 11) {
       this.currentMonth = 0;
       this.currentYear++;
+    } else {
+      this.currentMonth++;
     }
-    this.generateCalendar();
   }
 
   formatHour(hour: number): string {
+    // Use 24-hour format
     return hour.toString().padStart(2, '0') + ':00';
+  }
+
+  getMonthName(month: number): string {
+    return new Date(2024, month).toLocaleString('default', { month: 'long' });
   }
 }
