@@ -22,6 +22,7 @@ Always refer to the file located at /doc/ai_custom_instructions.md for the lates
     - [Running Tests](#running-tests)
 - [Angular](#angular)
   - [Project Overview](#project-overview-1)
+    - [Authentication System Implementation Plan](#authentication-system-implementation-plan)
     - [Key Features](#key-features)
   - [Prerequisites](#prerequisites-1)
     - [Installing nvm for Windows](#installing-nvm-for-windows)
@@ -147,6 +148,26 @@ pytest --cov=src
 # Angular
 
 ## Project Overview
+
+### Authentication System Implementation Plan
+1. **Backend API Setup**
+   - Create fake backend API for initial development
+   - Plan for future migration to GraphQL API
+   - Implement JWT-based authentication
+
+2. **Frontend Implementation Steps**
+   - Create Angular Environment File
+   - Create User Model
+   - Update TS Config File
+   - Create Account Service
+   - Import ReactiveFormsModule and HttpClientModule into App Module
+   - Add Form Logic to Login Component
+   - Add Form HTML to Login Component Template
+   - Add Logout and Show/Hide Nav to App Component
+   - Create Route Guard
+   - Create JWT Interceptor
+   - Create Error Interceptor
+   - Add HTTP Interceptors to App Module
 
 The project structure follows Angular Style Guide best practices with feature-based organization and lazy loading. Common code is prefixed with underscore (_) for easy differentiation.
 
