@@ -22,6 +22,7 @@ Always refer to the file located at /doc/ai_custom_instructions.md for the lates
     - [Running Tests](#running-tests)
 - [Angular](#angular)
   - [Project Overview](#project-overview-1)
+    - [Key Features](#key-features)
   - [Prerequisites](#prerequisites-1)
     - [Installing nvm for Windows](#installing-nvm-for-windows)
     - [Setting up Node.js with nvm](#setting-up-nodejs-with-nvm)
@@ -146,26 +147,88 @@ pytest --cov=src
 # Angular
 
 ## Project Overview
+
+The project structure follows Angular Style Guide best practices with feature-based organization and lazy loading. Common code is prefixed with underscore (_) for easy differentiation.
+
 ```
-angular-project/
-├── src/                    # Source code
-│   ├── app/               # Main application code
-│   │   ├── components/    # Reusable components
-│   │   ├── services/      # Services
-│   │   ├── models/        # TypeScript interfaces/types
-│   │   └── shared/        # Shared modules/utilities
-│   ├── assets/            # Static assets
-│   │   ├── images/        # Image files
-│   │   └── styles/        # Global SASS files
-│   ├── environments/      # Environment configurations
-│   └── styles/            # Global styles
-├── e2e/                   # End-to-end tests
-├── .vscode/               # VS Code configuration
-├── angular.json           # Angular CLI configuration
-├── package.json          # Project dependencies
-├── tsconfig.json         # TypeScript configuration
-└── README.md             # Project documentation
+src/
+├── app/
+│   ├── _components/       # Shared components
+│   │   ├── alert.component.html
+│   │   ├── alert.component.ts
+│   │   └── index.ts      # Barrel file for easier imports
+│   ├── _helpers/         # Auth guards, interceptors
+│   │   ├── auth.guard.ts
+│   │   ├── error.interceptor.ts
+│   │   ├── jwt.interceptor.ts
+│   │   └── index.ts
+│   ├── _models/          # Shared interfaces/types
+│   │   ├── alert.ts
+│   │   ├── user.ts
+│   │   └── index.ts
+│   ├── _services/        # Shared services
+│   │   ├── account.service.ts
+│   │   ├── alert.service.ts
+│   │   └── index.ts
+│   ├── account/          # Account feature module
+│   │   ├── account-routing.module.ts
+│   │   ├── account.module.ts
+│   │   ├── layout.component.html
+│   │   ├── layout.component.ts
+│   │   ├── login.component.html
+│   │   ├── login.component.ts
+│   │   ├── register.component.html
+│   │   ├── register.component.ts
+│   │   └── index.ts
+│   ├── home/            # Home feature module
+│   │   ├── home.component.html
+│   │   ├── home.component.ts
+│   │   └── index.ts
+│   ├── users/           # Users feature module
+│   │   ├── add-edit.component.html
+│   │   ├── add-edit.component.ts
+│   │   ├── layout.component.html
+│   │   ├── layout.component.ts
+│   │   ├── list.component.html
+│   │   ├── list.component.ts
+│   │   ├── users-routing.module.ts
+│   │   ├── users.module.ts
+│   │   └── index.ts
+│   ├── app-routing.module.ts
+│   ├── app.component.html
+│   ├── app.component.ts
+│   └── app.module.ts
+├── environments/
+│   ├── environment.prod.ts
+│   └── environment.ts
+├── assets/              # Static assets
+├── styles/             # Global styles
+├── index.html
+├── main.ts
+├── polyfills.ts
+└── styles.sass
 ```
+
+### Key Features
+1. **Feature Modules**: Each feature (account, home, users) is organized into self-contained modules with their own routing and components.
+2. **Barrel Files**: `index.ts` files group exported modules for cleaner imports (e.g., `import { AccountService } from '@app/_services'`).
+3. **TypeScript Path Aliases**: Configured in tsconfig.json:
+   ```json
+   {
+     "compilerOptions": {
+       "paths": {
+         "@app/*": ["src/app/*"],
+         "@environments/*": ["src/environments/*"]
+       }
+     }
+   }
+   ```
+4. **Common Code Organization**: Shared code prefixed with underscore (_) for easy identification:
+   - _components: Reusable UI components
+   - _helpers: Guards, interceptors
+   - _models: Interfaces and types
+   - _services: Shared services
+5. **Lazy Loading**: Feature modules are lazy loaded through the app routing module for better performance.
 
 ## Prerequisites
 - nvm (Node Version Manager) for Windows
