@@ -2,9 +2,9 @@
 
 Always refer to the file located at /doc/ai_custom_instructions.md for the latest updates regarding Git-related actions across different projects, repositories, and computers. Ensure you are using the most recent version of the file when performing any Git-related tasks, including branch creation, merging, and syncing.
 
-# Table of Contents
+# Table of **Contents**
 - [AI Reference Instructions](#ai-reference-instructions)
-- [Table of Contents](#table-of-contents)
+- [Table of **Contents**](#table-of-contents)
 - [Python](#python)
   - [Project Overview](#project-overview)
   - [Prerequisites](#prerequisites)
@@ -170,15 +170,39 @@ src/
 │   │   ├── account.service.ts
 │   │   ├── alert.service.ts
 │   │   └── index.ts
-│   ├── account/          # Account feature module
+│   ├── login/           # Authentication feature module
+│   │   ├── components/
+│   │   │   ├── login-form/
+│   │   │   │   ├── login-form.component.html
+│   │   │   │   ├── login-form.component.sass
+│   │   │   │   └── login-form.component.ts
+│   │   │   └── forgot-password/
+│   │   │       ├── forgot-password.component.html
+│   │   │       ├── forgot-password.component.sass
+│   │   │       └── forgot-password.component.ts
+│   │   ├── services/
+│   │   │   ├── auth.service.ts
+│   │   │   └── token.service.ts
+│   │   ├── models/
+│   │   │   ├── user-credentials.interface.ts
+│   │   │   └── auth-response.interface.ts
+│   │   ├── guards/
+│   │   │   └── auth.guard.ts
+│   │   ├── login-routing.module.ts
+│   │   ├── login.module.ts
+│   │   └── index.ts
+│   ├── account/          # Account management feature module
 │   │   ├── account-routing.module.ts
 │   │   ├── account.module.ts
-│   │   ├── layout.component.html
-│   │   ├── layout.component.ts
-│   │   ├── login.component.html
-│   │   ├── login.component.ts
-│   │   ├── register.component.html
-│   │   ├── register.component.ts
+│   │   ├── components/
+│   │   │   ├── profile/
+│   │   │   │   ├── profile.component.html
+│   │   │   │   ├── profile.component.sass
+│   │   │   │   └── profile.component.ts
+│   │   │   └── register/
+│   │   │       ├── register.component.html
+│   │   │       ├── register.component.sass
+│   │   │       └── register.component.ts
 │   │   └── index.ts
 │   ├── home/            # Home feature module
 │   │   ├── home.component.html
