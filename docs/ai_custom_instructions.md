@@ -175,11 +175,12 @@ angular-project/
   - SASS Formatter
 
 ### Installing nvm for Windows
-1. Download nvm-windows installer:
-   - Go to https://github.com/coreybutler/nvm-windows/releases
-   - Download 'nvm-setup.exe' from the latest release
-2. Run the installer and follow the setup wizard
-3. Verify installation in terminal:
+1. Install using winget:
+   ```bash
+   winget install -e --id CoreyButler.NVMforWindows
+   ```
+2. Restart your terminal after installation
+3. Verify installation:
    ```bash
    nvm version
    ```
