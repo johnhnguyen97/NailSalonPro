@@ -213,8 +213,10 @@ ng new project-name --style=sass --routing=true
 # Install dependencies
 npm install
 
-# Start development server
+# Start development server (either method works)
 ng serve
+# OR using npx if ng command is not found
+npx --yes @angular/cli serve
 ```
 
 ## SASS (Indented) Configuration
