@@ -23,6 +23,8 @@ Always refer to the file located at /doc/ai_custom_instructions.md for the lates
 - [Angular](#angular)
   - [Project Overview](#project-overview-1)
   - [Prerequisites](#prerequisites-1)
+    - [Installing nvm for Windows](#installing-nvm-for-windows)
+    - [Setting up Node.js with nvm](#setting-up-nodejs-with-nvm)
   - [Initial Setup](#initial-setup-1)
   - [SASS (Indented) Configuration](#sass-indented-configuration)
     - [Structure](#structure-1)
@@ -166,17 +168,42 @@ angular-project/
 ```
 
 ## Prerequisites
-- Node.js (LTS version)
-- npm (Node package manager)
-- Angular CLI
+- nvm (Node Version Manager) for Windows
 - VS Code Extensions:
   - Angular Language Service
   - Angular Snippets
   - SASS Formatter
 
+### Installing nvm for Windows
+1. Download nvm-windows installer:
+   - Go to https://github.com/coreybutler/nvm-windows/releases
+   - Download 'nvm-setup.exe' from the latest release
+2. Run the installer and follow the setup wizard
+3. Verify installation in terminal:
+   ```bash
+   nvm version
+   ```
+
+### Setting up Node.js with nvm
+```bash
+# Install LTS version of Node.js
+nvm install lts
+
+# Use the installed version
+nvm use lts
+
+# Verify installation
+node --version
+npm --version
+```
+
 ## Initial Setup
 ```bash
-# Install Angular CLI globally
+# Create new nvm environment for your project
+nvm install lts
+nvm use lts
+
+# Install Angular CLI globally in this environment
 npm install -g @angular/cli
 
 # Create new project
